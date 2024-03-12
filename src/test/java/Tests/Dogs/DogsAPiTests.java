@@ -4,7 +4,8 @@ import io.qameta.allure.*;
 import org.testng.annotations.Test;
 
 import static Common.CommonTestData.Success_Status_Code;
-import static Common.RequestBuilder.getListOfAllBreeds;
+import static Common.RequestBuilder.createUserResponse;
+import static Common.RequestBuilder.getListOfAllBreedsResponse;
 import static org.hamcrest.Matchers.containsString;
 
 @Test
@@ -15,7 +16,7 @@ public class DogsAPiTests {
     @Description("As an api user i want to get the list of all breeds")
     @Severity(SeverityLevel.CRITICAL)
     public void getListOfAllBreedsTests(){
-        getListOfAllBreeds().
+        createUserResponse().
                 then().
                 assertThat().
                 statusCode(Success_Status_Code).
