@@ -4,10 +4,9 @@ import groovy.xml.StreamingDOMBuilder;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 
-import static Common.BasePaths.Dogs_BaseURL;
-import static Common.BasePaths.ReqRes_BaseURL;
+import static Common.BasePaths.*;
 import static Common.ContentTypes.json_contentType;
-import static Common.PayloadBuilder.createUserObject;
+import static Common.PayloadBuilder.*;
 import static io.restassured.RestAssured.given;
 
 public class RequestBuilder {
@@ -18,6 +17,16 @@ public class RequestBuilder {
                 contentType(json_contentType).
                 log().all().
                 get(Dogs_BaseURL+"/breeds/list/all").
+                then().
+                log().all().
+                extract().response();
+    }
+    public static Response getDogByBreedsResponse() {
+        return given().
+                when().
+                contentType(json_contentType).
+                log().all().
+                get(Dogs_BaseURL+"/breed/hound/images").
                 then().
                 log().all().
                 extract().response();
@@ -33,6 +42,49 @@ public class RequestBuilder {
                 log().all().
                 extract().response();
     }
+    public static Response getUserlistResponse(){
+        return given().
+                when().
+                contentType(json_contentType).
+                log().all().
+                get(ReqRes_BaseURL+"/api/users?page=2").
+                then().
+                log().all().
+                extract().response();
+    }
+    public static Response updateUserResponse(){
+        return given().
+                when().
+                body(updateUserObject()).
+                contentType(json_contentType).
+                log().all().
+                put(ReqRes_BaseURL+"/api/users/689").
+                then().
+                log().all().
+                extract().response();
+    }
+    public static Response patchUserResponse() {
+        return given().
+                when().
+                body(updateUserObject()).
+                contentType(json_contentType).
+                log().all().
+                patch(ReqRes_BaseURL + "/api/users/689").
+                then().
+                log().all().
+                extract().response();
+    }
+    public static Response deleteUserResponse(){
+        return given().
+                when().
+                contentType(json_contentType).
+                log().all().
+                delete(ReqRes_BaseURL+"/api/users/689").
+                then().
+                log().all().
+                extract().response();
+}
+
 
     public static Response getDogsByBreedResponse(){
         return given().
@@ -69,7 +121,18 @@ public class RequestBuilder {
                 extract().response();
     }
 
-
+    public static Response registerNewWeatherStationResponse(){
+        return given().
+                queryParam("appid","8dc92b60f521a3fb9e771348c8016c32").
+                when().
+                body(registerWeatherStationObject()).
+                contentType(json_contentType).
+                log().all().
+                post(Weather_BaseURL+"/data/3.0/stations").
+                then().
+                log().all().
+                extract().response();
+    }
 
 
 }

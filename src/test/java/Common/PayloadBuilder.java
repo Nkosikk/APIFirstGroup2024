@@ -12,5 +12,24 @@ public class PayloadBuilder {
 
         return jsonObject;
     }
+    public static JSONObject updateUserObject(){
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("name","Nkosi");
+        jsonObject.put("job","tester");
+        jsonObject.put("Address","34 Aberdeen road");
 
+        return jsonObject;
 }
+    public static JSONObject registerWeatherStationObject(){
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("external_id","MD_Testing01");
+        jsonObject.put("name","Midrand Test Station");
+        jsonObject.put("latitude",37.76);
+        jsonObject.put("longitude",-122.43);
+        jsonObject.put("altitude",150);
+
+        return jsonObject;
+    }
+
+    }
+
