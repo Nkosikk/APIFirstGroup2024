@@ -34,8 +34,18 @@ public class RequestBuilder {
                 extract().response();
     }
 
+    public static Response getDogsByBreedResponse(){
+        return given().
+                when().
+                contentType(json_contentType).
+                log().all().
+                get(Dogs_BaseURL+"/breed/hound/images").
+                then().
+                log().all().
+                extract().response();
+    }
 
-
+    //*** REQRES STARTS HERE***
     public static Response createUserResponse(){
         return given().
                 when().
@@ -47,5 +57,8 @@ public class RequestBuilder {
                 log().all().
                 extract().response();
     }
+
+
+
 
 }
