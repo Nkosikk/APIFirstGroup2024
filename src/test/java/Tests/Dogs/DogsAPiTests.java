@@ -46,4 +46,15 @@ public class DogsAPiTests {
                 body("status",containsStringIgnoringCase("success"));
     }
 
+    @Description("As an api user i want to get Breeds List")
+    @Severity(SeverityLevel.CRITICAL)
+    public void getByBreedsListTest(){
+        getBreedsListResponse().
+                then().
+                assertThat().
+                statusCode(Success_Status_Code).
+                body("message", notNullValue()).
+                body("status",containsStringIgnoringCase("success"));
+    }
+
 }
