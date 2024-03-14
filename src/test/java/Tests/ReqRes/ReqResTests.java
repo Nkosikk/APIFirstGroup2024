@@ -18,7 +18,7 @@ public class ReqResTests {
     @Description("As an api user i want to create a new user")
     @Severity(SeverityLevel.CRITICAL)
     public void createUserTests(){
-        createUserResponse().
+        get().
                 then().
                 assertThat().
                 statusCode(Create_Success_Status_Code).

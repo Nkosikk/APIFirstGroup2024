@@ -16,7 +16,7 @@ public class DogsAPiTests {
     @Description("As an api user i want to get the list of all breeds")
     @Severity(SeverityLevel.CRITICAL)
     public void getListOfAllBreedsTests(){
-        createUserResponse().
+        getListOfAllBreedsResponse().
                 then().
                 assertThat().
                 statusCode(Success_Status_Code).
