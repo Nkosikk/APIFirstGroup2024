@@ -45,6 +45,17 @@ public class RequestBuilder {
                 extract().response();
     }
 
+    public static Response getListofAllSubBreedResponse(){
+        return given().
+                when().
+                contentType(json_contentType).
+                log().all().
+                get(Dogs_BaseURL+"/breed/hound/list").
+                then().
+                log().all().
+                extract().response();
+    }
+
     public static Response getBreedsListResponse(){
         return given().
                 when().

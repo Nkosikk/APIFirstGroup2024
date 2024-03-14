@@ -46,6 +46,18 @@ public class DogsAPiTests {
                 body("status",containsStringIgnoringCase("success"));
     }
 
+    @Description("As an api user i want to get list of all sub breeds")
+    @Severity(SeverityLevel.CRITICAL)
+    public void getListOfAllSubBreedTest(){
+        getListofAllSubBreedResponse().
+                then().
+                assertThat().
+                statusCode(Success_Status_Code).
+                body(containsStringIgnoringCase("blood")).
+                body(containsStringIgnoringCase("ibizan")).
+                body("status",containsStringIgnoringCase("success"));
+    }
+
     @Description("As an api user i want to get Breeds List")
     @Severity(SeverityLevel.CRITICAL)
     public void getByBreedsListTest(){
