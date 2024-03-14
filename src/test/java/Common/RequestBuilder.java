@@ -23,6 +23,19 @@ public class RequestBuilder {
                 extract().response();
     }
 
+    public static Response getDisplaySingleRandomImageFromAllDogsCollectionResponse() {
+        return given().
+                when().
+                contentType(json_contentType).
+                log().all().
+                get(Dogs_BaseURL+"/breeds/image/random").
+                then().
+                log().all().
+                extract().response();
+    }
+
+
+
     public static Response createUserResponse(){
         return given().
                 when().

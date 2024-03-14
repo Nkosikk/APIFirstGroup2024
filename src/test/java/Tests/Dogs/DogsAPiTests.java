@@ -4,9 +4,8 @@ import io.qameta.allure.*;
 import org.testng.annotations.Test;
 
 import static Common.CommonTestData.Success_Status_Code;
-import static Common.RequestBuilder.createUserResponse;
-import static Common.RequestBuilder.getListOfAllBreedsResponse;
-import static org.hamcrest.Matchers.containsString;
+import static Common.RequestBuilder.*;
+import static org.hamcrest.Matchers.*;
 
 @Test
 @Feature("Dogs API")
@@ -23,6 +22,17 @@ public class DogsAPiTests {
                 body(containsString("borzoi")).
                 body(containsString("mountain")).
                 body(containsString("wolfhound"));
+    }
+
+    @Description("As an api user i want to display single random image from all dogs collection")
+    @Severity(SeverityLevel.CRITICAL)
+    public void getDisplaySingleRandomImageFromAllDogsCollectionTests(){
+        getDisplaySingleRandomImageFromAllDogsCollectionResponse().
+                then().
+                assertThat().
+                statusCode(Success_Status_Code).
+                body("message", notNullValue()).
+                body("status",containsStringIgnoringCase("success"));
     }
 
 }
