@@ -56,6 +56,17 @@ public class RequestBuilder {
                 extract().response();
     }
 
+    public static Response getBreedsListResponse(){
+        return given().
+                when().
+                contentType(json_contentType).
+                log().all().
+                get(Dogs_BaseURL+"/breed/affenpinscher/images/random").
+                then().
+                log().all().
+                extract().response();
+    }
+
     //*** REQRES STARTS HERE***
     public static Response createUserResponse(){
         return given().
