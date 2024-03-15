@@ -6,8 +6,7 @@ import org.testng.annotations.Test;
 
 import static Common.CommonTestData.Create_Success_Status_Code;
 import static Common.CommonTestData.Success_Status_Code;
-import static Common.RequestBuilder.createUserResponse;
-import static Common.RequestBuilder.getListOfAllBreedsResponse;
+import static Common.RequestBuilder.*;
 import static org.hamcrest.Matchers.*;
 
 @Test
@@ -26,5 +25,15 @@ public class ReqResTests {
                 body("job",containsStringIgnoringCase("Tester")).
                 body("id", notNullValue()).
                 body("createdAt", notNullValue());
+    }
+@Description("As an api user i want to get List of Users ")
+@Severity(SeverityLevel.CRITICAL)
+    public void getByListUsersTest(){
+        getBreedsListResponse().
+                then().
+                assertThat().
+                statusCode(Success_Status_Code).
+                body("message", notNullValue()).
+                body("status",containsStringIgnoringCase("success"));
     }
 }
