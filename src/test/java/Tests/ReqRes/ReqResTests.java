@@ -26,6 +26,16 @@ public class ReqResTests {
                 body("id", notNullValue()).
                 body("createdAt", notNullValue());
     }
+@Description("As an api user i want to get List of Users ")
+@Severity(SeverityLevel.CRITICAL)
+    public void getByListUsersTest(){
+        getBreedsListResponse().
+                then().
+                assertThat().
+                statusCode(Success_Status_Code).
+                body("message", notNullValue()).
+                body("status",containsStringIgnoringCase("success"));
+    }
 
     @Description("This is to display a list of resources")
     @Severity(SeverityLevel.CRITICAL)
