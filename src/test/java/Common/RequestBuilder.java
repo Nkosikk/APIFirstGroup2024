@@ -10,7 +10,7 @@ import static Common.PayloadBuilder.*;
 import static io.restassured.RestAssured.given;
 
 public class RequestBuilder {
-
+    public static String stationID;
     public static Response getListOfAllBreedsResponse() {
         return given().
                 when().
@@ -144,7 +144,7 @@ public class RequestBuilder {
     }
 
     public static Response registerNewWeatherStationResponse(){
-        return given().
+        Response response =  given().
                 queryParam("appid","8dc92b60f521a3fb9e771348c8016c32").
                 when().
                 body(registerWeatherStationObject()).
@@ -154,6 +154,8 @@ public class RequestBuilder {
                 then().
                 log().all().
                 extract().response();
+        stationID = response.jsonPath().getString("ID");
+        return response;
     }
 
 
