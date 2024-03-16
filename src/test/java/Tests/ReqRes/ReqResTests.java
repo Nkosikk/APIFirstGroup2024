@@ -26,6 +26,7 @@ public class ReqResTests {
                 body("id", notNullValue()).
                 body("createdAt", notNullValue());
     }
+
 @Description("As an api user i want to get List of Users ")
 @Severity(SeverityLevel.CRITICAL)
     public void getListUsersTest(){
