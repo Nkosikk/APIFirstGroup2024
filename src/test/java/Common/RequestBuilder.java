@@ -195,4 +195,18 @@ public class RequestBuilder {
                 extract ().response ();
     }
 
+    //*** NEGATIVE TEST HERE***
+    public static Response updateWeatherStationWithInvalidLongitudeValuesResponse(){
+        return given().
+                queryParam("appid","8dc92b60f521a3fb9e771348c8016c32").
+                when ().
+                body(updateWeatherStationWithInvalidLongitudeValuesObject ()).
+                contentType (json_contentType).
+                log ().all ().
+                put (Weather_BaseURL + "/data/3.0/stations/" + stationID).
+                then().
+                log().all ().
+                extract ().response ();
+    }
+
 }

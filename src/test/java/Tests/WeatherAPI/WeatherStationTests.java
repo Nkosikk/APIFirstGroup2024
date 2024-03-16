@@ -68,5 +68,16 @@ public class WeatherStationTests {
                 body ("altitude", notNullValue ()).
                 body ("rank", notNullValue ());
     }
+
+
+    //*** NEGATIVE TEST HERE***
+    @Description("As an api user I want to validate that the response status code is 400")
+    @Severity(SeverityLevel.CRITICAL)
+    public void updateWeatherStationWithInvalidLongitudeValuesTests() {
+        updateWeatherStationWithInvalidLongitudeValuesResponse ().
+                then ().
+                assertThat ().
+                statusCode (Bad_Request_Status_Code);
+    }
 }
 
