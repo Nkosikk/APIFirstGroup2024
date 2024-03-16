@@ -41,6 +41,15 @@ public class ReqResTests {
                 body("data", hasSize(6)).
                 body("support", notNullValue());
     }
+    public void updateUserTests() {
+        updateUserResponse().
+                then().
+                assertThat().
+                statusCode(Success_Status_Code).
+                body("name", containsStringIgnoringCase("Letho")).
+                body("job", containsStringIgnoringCase("Tester")).
+                body("updatedAt", notNullValue());
+    }
 
     @Description("This is to display a list of resources")
     @Severity(SeverityLevel.CRITICAL)
