@@ -28,13 +28,17 @@ public class ReqResTests {
     }
 @Description("As an api user i want to get List of Users ")
 @Severity(SeverityLevel.CRITICAL)
-    public void getByListUsersTest(){
-        getBreedsListResponse().
+    public void getListUsersTest(){
+        getListUsersResponse().
                 then().
                 assertThat().
                 statusCode(Success_Status_Code).
-                body("message", notNullValue()).
-                body("status",containsStringIgnoringCase("success"));
+                body("page",is(2)).
+                body("per_page",is(6)).
+                body("total", is(12)).
+                body("total_pages", is(2)).
+                body("data", hasSize(6)).
+                body("support", notNullValue());
     }
 
     @Description("This is to display a list of resources")
