@@ -80,5 +80,14 @@ public class RequestBuilder {
                 extract().response();
     }
 
-
+    public static Response getListUsersResponse(){
+        return given().
+                when().
+                contentType(json_contentType).
+                log().all().
+                get(ReqRes_BaseURL+"/api/users?page=2").
+                then().
+                log().all().
+                extract().response();
+    }
 }
