@@ -154,6 +154,7 @@ public class RequestBuilder {
                 extract().response();
     }
 
+    //*** WEATHER STARTS HERE***
     public static Response registerNewWeatherStationResponse(){
         Response response =  given().
                 queryParam("appid","8dc92b60f521a3fb9e771348c8016c32").
@@ -181,5 +182,17 @@ public class RequestBuilder {
                 extract().response();
     }
 
+    public static Response updateWeatherStationInfoResponse(){
+        return given().
+                queryParam("appid","8dc92b60f521a3fb9e771348c8016c32").
+                when ().
+                body(updateWeatherStationInfoObject ()).
+                contentType (json_contentType).
+                log ().all ().
+                put (Weather_BaseURL + "/data/3.0/stations/" + stationID).
+                then().
+                log().all ().
+                extract ().response ();
+    }
 
 }

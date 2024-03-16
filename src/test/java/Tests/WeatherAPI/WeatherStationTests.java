@@ -50,5 +50,23 @@ public class WeatherStationTests {
                 body("altitude", notNullValue()).
                 body("rank", notNullValue());
     }
+
+    @Test(dependsOnMethods = "registerNewWeatherStationTests")
+    @Description("As an api user I want to update the newly created weather station")
+    @Severity(SeverityLevel.CRITICAL)
+    public void updateWeatherStationInfoTests() {
+        updateWeatherStationInfoResponse().
+                then ().
+                assertThat ().
+                statusCode (Success_Status_Code).
+                body ("created_at", notNullValue ()).
+                body ("updated_at", notNullValue ()).
+                body ("external_id", containsStringIgnoringCase ("MD_UpdTesting01")).
+                body ("name", containsStringIgnoringCase ("Midrand Test Updated Station")).
+                body ("latitude", notNullValue ()).
+                body ("longitude", notNullValue ()).
+                body ("altitude", notNullValue ()).
+                body ("rank", notNullValue ());
+    }
 }
 
