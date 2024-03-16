@@ -3,6 +3,7 @@ package Common;
 import groovy.xml.StreamingDOMBuilder;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
+import org.testng.annotations.Test;
 
 import static Common.BasePaths.*;
 import static Common.ContentTypes.json_contentType;
@@ -156,6 +157,18 @@ public class RequestBuilder {
                 extract().response();
         stationID = response.jsonPath().getString("ID");
         return response;
+    }
+
+    public static Response getNewWeatherStationInfoResponse(){
+        return given().
+                queryParam("appid","8dc92b60f521a3fb9e771348c8016c32").
+                when().
+                contentType(json_contentType).
+                log().all().
+                get(Weather_BaseURL+"/data/3.0/stations/" + stationID).
+                then().
+                log().all().
+                extract().response();
     }
 
 
