@@ -12,6 +12,7 @@ import static io.restassured.RestAssured.given;
 
 public class RequestBuilder {
     public static String stationID;
+    public static String UserID;
     public static Response getListOfAllBreedsResponse() {
         return given().
                 when().
@@ -53,17 +54,17 @@ public class RequestBuilder {
                 log().all().
                 extract().response();
     }
-    public static Response updateUserResponse(){
-        return given().
-                when().
-                body(updateUserObject()).
-                contentType(json_contentType).
-                log().all().
-                put(ReqRes_BaseURL+"/api/users/689").
-                then().
-                log().all().
-                extract().response();
-    }
+//    public static Response updateUserResponse(){
+//        return given().
+//                when().
+//                body(updateUserObject()).
+//                contentType(json_contentType).
+//                log().all().
+//                put(ReqRes_BaseURL+"/api/users/689").
+//                then().
+//                log().all().
+//                extract().response();
+//    }
 
     public static Response getListResourceResponse(){
         return given().
@@ -133,7 +134,7 @@ public class RequestBuilder {
 
     //*** REQRES STARTS HERE***
     public static Response createUserResponse(){
-        return given().
+        Response response = given().
                 when().
                 body(createUserObject()).
                 contentType(json_contentType).
@@ -142,6 +143,8 @@ public class RequestBuilder {
                 then().
                 log().all().
                 extract().response();
+        UserID = response.jsonPath().getString("ID");
+        return response;
     }
     public static Response getListUsersResponse(){
         return given().
@@ -149,6 +152,17 @@ public class RequestBuilder {
                 contentType(json_contentType).
                 log().all().
                 get(ReqRes_BaseURL+"/api/users?page=2").
+                then().
+                log().all().
+                extract().response();
+    }
+    public static Response updateUserResponse(){
+        return given().
+                when().
+                body(updateUserObject()).
+                contentType(json_contentType).
+                log().all().
+                put(ReqRes_BaseURL+"/api/users/" + UserID).
                 then().
                 log().all().
                 extract().response();
