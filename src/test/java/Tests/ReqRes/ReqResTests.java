@@ -6,8 +6,7 @@ import org.testng.annotations.Test;
 
 import static Common.CommonTestData.Create_Success_Status_Code;
 import static Common.CommonTestData.Success_Status_Code;
-import static Common.RequestBuilder.createUserResponse;
-import static Common.RequestBuilder.getListOfAllBreedsResponse;
+import static Common.RequestBuilder.*;
 import static org.hamcrest.Matchers.*;
 
 @Test
@@ -26,5 +25,20 @@ public class ReqResTests {
                 body("job",containsStringIgnoringCase("Tester")).
                 body("id", notNullValue()).
                 body("createdAt", notNullValue());
+    }
+
+    @Description("This is to display a list of resources")
+    @Severity(SeverityLevel.CRITICAL)
+    public void getListResourceTests(){
+        getListResourceResponse().
+                then().
+                assertThat().
+                statusCode(Success_Status_Code).
+                body("page",is(1)).
+                body("per_page",is(6)).
+                body("total", is(12)).
+                body("total_pages", is(2)).
+                body("data", hasSize(6)).
+                body("support", notNullValue());
     }
 }
