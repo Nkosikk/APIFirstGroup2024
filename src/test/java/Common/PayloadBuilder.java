@@ -42,5 +42,13 @@ public class PayloadBuilder {
         return jsonObject;
     }
 
+    //*** NEGATIVE TEST HERE*** ToBeUpdated :(
+    public static JSONObject updateWeatherStationWithInvalidLongitudeValuesObject() {
+        JSONObject jsonObject = new JSONObject ();
+        jsonObject.put ("longitude", 200.50);
+
+        return jsonObject;
+    }
+
 }
 
