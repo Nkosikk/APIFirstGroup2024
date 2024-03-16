@@ -10,7 +10,7 @@ import static Common.PayloadBuilder.*;
 import static io.restassured.RestAssured.given;
 
 public class RequestBuilder {
-
+    public static String stationID;
     public static Response getListOfAllBreedsResponse() {
         return given().
                 when().
@@ -59,6 +59,17 @@ public class RequestBuilder {
                 contentType(json_contentType).
                 log().all().
                 put(ReqRes_BaseURL+"/api/users/689").
+                then().
+                log().all().
+                extract().response();
+    }
+
+    public static Response getListResourceResponse(){
+        return given().
+                when().
+                contentType(json_contentType).
+                log().all().
+                get(ReqRes_BaseURL+"/api/unknown").
                 then().
                 log().all().
                 extract().response();
@@ -133,7 +144,7 @@ public class RequestBuilder {
     }
 
     public static Response registerNewWeatherStationResponse(){
-        return given().
+        Response response =  given().
                 queryParam("appid","8dc92b60f521a3fb9e771348c8016c32").
                 when().
                 body(registerWeatherStationObject()).
@@ -143,6 +154,8 @@ public class RequestBuilder {
                 then().
                 log().all().
                 extract().response();
+        stationID = response.jsonPath().getString("ID");
+        return response;
     }
 
 
