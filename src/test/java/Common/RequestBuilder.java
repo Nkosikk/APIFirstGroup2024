@@ -63,6 +63,17 @@ public class RequestBuilder {
                 log().all().
                 extract().response();
     }
+
+    public static Response getListResourceResponse(){
+        return given().
+                when().
+                contentType(json_contentType).
+                log().all().
+                get(ReqRes_BaseURL+"/api/unknown").
+                then().
+                log().all().
+                extract().response();
+    }
     public static Response patchUserResponse() {
         return given().
                 when().
