@@ -5,8 +5,7 @@ import org.testng.annotations.Test;
 
 import static Common.CommonTestData.*;
 import static Common.RequestBuilder.*;
-import static org.hamcrest.Matchers.containsStringIgnoringCase;
-import static org.hamcrest.Matchers.notNullValue;
+import static org.hamcrest.Matchers.*;
 
 
 @Test
@@ -32,6 +31,24 @@ public class WeatherStationTests {
                 body("source_type", notNullValue());
 
 
+    }
+    @Test(dependsOnMethods = "registerNewWeatherStationTests")
+    @Description("This is to get information of the newly created Weather Station")
+    @Severity(SeverityLevel.CRITICAL)
+    public void getNewWeatherStationInfoTests(){
+        getNewWeatherStationInfoResponse().
+                then().
+                assertThat().
+                statusCode(Success_Status_Code).
+                body("id",notNullValue()).
+                body("created_at",notNullValue()).
+                body("updated_at", notNullValue()).
+                body("external_id",notNullValue()).
+                body("name", notNullValue()).
+                body("longitude", notNullValue()).
+                body("latitude", notNullValue()).
+                body("altitude", notNullValue()).
+                body("rank", notNullValue());
     }
 }
 
