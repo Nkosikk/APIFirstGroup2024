@@ -167,6 +167,16 @@ public class RequestBuilder {
                 log().all().
                 extract().response();
     }
+    public static Response getSingleUserNotFoundResponse(){
+        return given().
+                when().
+                contentType(json_contentType).
+                log().all().
+                get(ReqRes_BaseURL+"/api/users/23").
+                then().
+                log().all().
+                extract().response();
+    }
 
 
     //*** WEATHER STARTS HERE***

@@ -4,8 +4,7 @@ import groovyjarjarantlr4.v4.runtime.misc.NotNull;
 import io.qameta.allure.*;
 import org.testng.annotations.Test;
 
-import static Common.CommonTestData.Create_Success_Status_Code;
-import static Common.CommonTestData.Success_Status_Code;
+import static Common.CommonTestData.*;
 import static Common.RequestBuilder.*;
 import static org.hamcrest.Matchers.*;
 
@@ -64,5 +63,13 @@ public class ReqResTests {
                 body("total_pages", is(2)).
                 body("data", hasSize(6)).
                 body("support", notNullValue());
+    }
+    @Description("As an api user i want to get 'Not Found' error for single user ")
+    @Severity(SeverityLevel.CRITICAL)
+    public void getSingleUserNotFoundTest(){
+        getSingleUserNotFoundResponse().
+                then().
+                assertThat().
+                statusCode(Not_Found_Status_Code);
     }
 }
