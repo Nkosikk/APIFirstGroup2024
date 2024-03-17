@@ -70,6 +70,18 @@ public class WeatherStationTests {
     }
 
 
+    @Description("As an api user I want to Register a new Weather Station with latitude as string")
+    @Severity(SeverityLevel.CRITICAL)
+    public void registerNewWeatherStationWithLatitudeAsStringTests()
+    {
+        registerNewWeatherStationWithLatitudeAsStringResponse().
+    then().
+    assertThat().
+    statusCode(Bad_Request_Status_Code).
+    body("code",notNullValue());
+    //body("message",containStringIgnoreingCase("unmarshal type error:expected=float64,got-string,offset-105"));
+    }
+
     //*** NEGATIVE TEST HERE***
     @Description("As an api user I want to validate that the response status code is 400")
     @Severity(SeverityLevel.CRITICAL)
