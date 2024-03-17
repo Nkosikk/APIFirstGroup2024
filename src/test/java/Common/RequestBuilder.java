@@ -168,6 +168,17 @@ public class RequestBuilder {
                 extract().response();
     }
 
+    public static Response getSingleUserResponse(){
+        return given().
+                when().
+                contentType(json_contentType).
+                log().all().
+                get(ReqRes_BaseURL+"/api/users/2").
+                then().
+                log().all().
+                extract().response();
+    }
+
     //*** WEATHER STARTS HERE***
     public static Response registerNewWeatherStationResponse(){
         Response response =  given().
