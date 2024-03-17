@@ -79,5 +79,24 @@ public class WeatherStationTests {
                 assertThat ().
                 statusCode (Bad_Request_Status_Code);
     }
+
+    @Test(dependsOnMethods = "registerNewWeatherStationTests")
+    @Description("This is to get informamation for Non Existant Station ID")
+    @Severity(SeverityLevel.CRITICAL)
+    public void getNewWeatherStationWithNonExistingStationIDTests() {
+        getNewWeatherStationWithNonExistingStationIDResponse().
+                then().
+                assertThat().
+                statusCode(Bad_Request_Status_Code);
+    }
+
+    @Description("As an api user I want to validate that the response status code is 400")
+    @Severity(SeverityLevel.CRITICAL)
+    public void updateWeatherStationWithLongitudeAsStringTests() {
+        updateWeatherStationWithLongitudeAsStringResponse().
+                then ().
+                assertThat ().
+                statusCode (Bad_Request_Status_Code);
+    }
 }
 
