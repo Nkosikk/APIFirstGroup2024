@@ -78,6 +78,8 @@ public class WeatherStationTests {
                 then ().
                 assertThat ().
                 statusCode (Bad_Request_Status_Code);
+                //body("code", notNullValue ()).
+                //body("message", containsStringIgnoringCase("Station id not valid"));
     }
 }
 

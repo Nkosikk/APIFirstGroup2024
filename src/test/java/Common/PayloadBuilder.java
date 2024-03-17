@@ -45,7 +45,11 @@ public class PayloadBuilder {
     //*** NEGATIVE TEST HERE*** ToBeUpdated :(
     public static JSONObject updateWeatherStationWithInvalidLongitudeValuesObject() {
         JSONObject jsonObject = new JSONObject ();
+        jsonObject.put ("external_id", "MD_UpdTesting01");
+        jsonObject.put ("name", "Midrand Test Updated Station");
+        jsonObject.put ("latitude", 37.76);
         jsonObject.put ("longitude", 200.50);
+        jsonObject.put ("altitude", "150");
 
         return jsonObject;
     }
