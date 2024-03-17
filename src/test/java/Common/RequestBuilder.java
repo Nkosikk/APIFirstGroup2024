@@ -167,7 +167,29 @@ public class RequestBuilder {
                 log().all().
                 extract().response();
     }
+    public static Response loginSuccessfullyResponse(){
+        return given().
+                when().
+                body(loginSuccessfullyObject()).
+                contentType(json_contentType).
+                log().all().
+                post (ReqRes_BaseURL+"/api/login").
+                then().
+                log().all().
+                extract().response();
+    }
 
+    public static Response loginUnSuccessfullyResponse(){
+        return given().
+                when().
+                body(loginUnSuccessfullyObject()).
+                contentType(json_contentType).
+                log().all().
+                post (ReqRes_BaseURL+"/api/login").
+                then().
+                log().all().
+                extract().response();
+    }
     //*** WEATHER STARTS HERE***
     public static Response registerNewWeatherStationResponse(){
         Response response =  given().
@@ -222,5 +244,6 @@ public class RequestBuilder {
                 log().all ().
                 extract ().response ();
     }
+
 
 }

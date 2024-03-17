@@ -20,6 +20,21 @@ public class PayloadBuilder {
 
         return jsonObject;
 }
+    public static JSONObject loginSuccessfullyObject(){
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put ("email","eve.holt@reqres.in");
+        jsonObject.put("password","cityslicka");
+
+        return jsonObject;
+    }
+
+    public static JSONObject loginUnSuccessfullyObject(){
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put ("email","sydney@fife");
+
+        return jsonObject;
+    }
+
     public static JSONObject registerWeatherStationObject(){
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("external_id","MD_Testing01");
