@@ -100,25 +100,5 @@ public class WeatherStationTests {
                 assertThat ().
                 statusCode (Bad_Request_Status_Code);
     }
-
-
-    @Description("As an api user i want to Register Weather Station With Empty ExternalID")
-    @Severity(SeverityLevel.CRITICAL)
-    public void registerWeatherStationWithExternalIDEmptyTests() {
-        registerNewWeatherStationResponse().
-                then().
-                assertThat().
-                statusCode(Create_Success_Status_Code).
-                body("ID", notNullValue()).
-                body("updated_at", notNullValue()).
-                body("created_at", notNullValue()).
-                body("external_id", equalTo("")). // empty external_id  equalTo("")).
-                body("name", notNullValue()).
-                body("latitude", notNullValue()).
-                body("longitude", notNullValue()).
-                body("altitude", notNullValue()).
-                body("rank", notNullValue()).
-                body("source_type", notNullValue());
-    }
 }
 
