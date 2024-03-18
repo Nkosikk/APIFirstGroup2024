@@ -64,5 +64,17 @@ public class PayloadBuilder {
         return jsonObject;
     }
 
+    public static JSONObject updateWeatherStationWithAltitudeAsStringObject(){
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put ("external_id", "MD_UpdTesting01");
+        jsonObject.put ("name", "Midrand Test Updated Station");
+        jsonObject.put ("latitude", 37.76);
+        jsonObject.put ("longitude", -122.43);
+        jsonObject.put ("altitude", "TEST");
+
+        return jsonObject;
+    }
+
+
 }
 

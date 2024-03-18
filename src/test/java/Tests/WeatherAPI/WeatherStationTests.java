@@ -120,5 +120,14 @@ public class WeatherStationTests {
                 body("rank", notNullValue()).
                 body("source_type", notNullValue());
     }
+
+    @Description("As an api user I want to validate that the response status code is 400")
+    @Severity(SeverityLevel.CRITICAL)
+    public void updateWeatherStationWithAltitudeAsStringTests() {
+        updateWeatherStationWithAltitudeAsStringResponse().
+                then ().
+                assertThat ().
+                statusCode (Bad_Request_Status_Code);
+    }
 }
 
