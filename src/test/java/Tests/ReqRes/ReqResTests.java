@@ -65,4 +65,16 @@ public class ReqResTests {
                 body("data", hasSize(6)).
                 body("support", notNullValue());
     }
+    @Description("As an API user I want to delay the response by 3 seconds")
+    @Severity(SeverityLevel.CRITICAL)
+    public void getDelayedResponseTests(){
+        getDelayedResponse ().
+                then().
+                assertThat().
+                statusCode(Success_Status_Code);
+        //body(containsString("George"));
+    }
+
 }
+
+

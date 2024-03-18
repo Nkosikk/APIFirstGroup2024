@@ -168,6 +168,18 @@ public class RequestBuilder {
                 extract().response();
     }
 
+    public static Response getDelayedResponse(){
+        return given().
+                when().
+                contentType(json_contentType).
+                log().all().
+                get (ReqRes_BaseURL+"/api/users?delay=3").
+                then().
+                log().all().
+                extract().response();
+    }
+
+
     //*** WEATHER STARTS HERE***
     public static Response registerNewWeatherStationResponse(){
         Response response =  given().
