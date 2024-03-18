@@ -247,4 +247,15 @@ public class RequestBuilder {
                 log().all ().
                 extract ().response ();
     }
+
+    public static Response getSingleResourceNotFoundResponse(){
+        return given().
+                when().
+                contentType(json_contentType).
+                log().all().
+                get(ReqRes_BaseURL+"/api/unknown/23").
+                then().
+                log().all().
+                extract().response();
+    }
 }
