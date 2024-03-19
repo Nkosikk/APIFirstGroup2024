@@ -3,6 +3,7 @@ package Common;
 import groovy.xml.StreamingDOMBuilder;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
+import org.testng.annotations.Test;
 
 import static Common.BasePaths.*;
 import static Common.ContentTypes.json_contentType;
@@ -11,6 +12,7 @@ import static io.restassured.RestAssured.given;
 
 public class RequestBuilder {
     public static String stationID;
+    public static String UserID;
     public static Response getListOfAllBreedsResponse() {
         return given().
                 when().
@@ -52,17 +54,17 @@ public class RequestBuilder {
                 log().all().
                 extract().response();
     }
-    public static Response updateUserResponse(){
-        return given().
-                when().
-                body(updateUserObject()).
-                contentType(json_contentType).
-                log().all().
-                put(ReqRes_BaseURL+"/api/users/689").
-                then().
-                log().all().
-                extract().response();
-    }
+//    public static Response updateUserResponse(){
+//        return given().
+//                when().
+//                body(updateUserObject()).
+//                contentType(json_contentType).
+//                log().all().
+//                put(ReqRes_BaseURL+"/api/users/689").
+//                then().
+//                log().all().
+//                extract().response();
+//    }
 
     public static Response getListResourceResponse(){
         return given().
@@ -132,7 +134,7 @@ public class RequestBuilder {
 
     //*** REQRES STARTS HERE***
     public static Response createUserResponse(){
-        return given().
+        Response response = given().
                 when().
                 body(createUserObject()).
                 contentType(json_contentType).
@@ -141,8 +143,54 @@ public class RequestBuilder {
                 then().
                 log().all().
                 extract().response();
+        UserID = response.jsonPath().getString("ID");
+        return response;
+    }
+    public static Response getListUsersResponse(){
+        return given().
+                when().
+                contentType(json_contentType).
+                log().all().
+                get(ReqRes_BaseURL+"/api/users?page=2").
+                then().
+                log().all().
+                extract().response();
+    }
+    public static Response updateUserResponse(){
+        return given().
+                when().
+                body(updateUserObject()).
+                contentType(json_contentType).
+                log().all().
+                put(ReqRes_BaseURL+"/api/users/" + UserID).
+                then().
+                log().all().
+                extract().response();
+    }
+    public static Response loginSuccessfullyResponse(){
+        return given().
+                when().
+                body(loginSuccessfullyObject()).
+                contentType(json_contentType).
+                log().all().
+                post (ReqRes_BaseURL+"/api/login").
+                then().
+                log().all().
+                extract().response();
     }
 
+    public static Response loginUnSuccessfullyResponse(){
+        return given().
+                when().
+                body(loginUnSuccessfullyObject()).
+                contentType(json_contentType).
+                log().all().
+                post (ReqRes_BaseURL+"/api/login").
+                then().
+                log().all().
+                extract().response();
+    }
+    //*** WEATHER STARTS HERE***
     public static Response registerNewWeatherStationResponse(){
         Response response =  given().
                 queryParam("appid","8dc92b60f521a3fb9e771348c8016c32").
@@ -158,5 +206,55 @@ public class RequestBuilder {
         return response;
     }
 
+    public static Response getNewWeatherStationInfoResponse(){
+        return given().
+                queryParam("appid","8dc92b60f521a3fb9e771348c8016c32").
+                when().
+                contentType(json_contentType).
+                log().all().
+                get(Weather_BaseURL+"/data/3.0/stations/" + stationID).
+                then().
+                log().all().
+                extract().response();
+    }
+
+    public static Response updateWeatherStationInfoResponse(){
+        return given().
+                queryParam("appid","8dc92b60f521a3fb9e771348c8016c32").
+                when ().
+                body(updateWeatherStationInfoObject ()).
+                contentType (json_contentType).
+                log ().all ().
+                put (Weather_BaseURL + "/data/3.0/stations/" + stationID).
+                then().
+                log().all ().
+                extract ().response ();
+    }
+
+    //*** NEGATIVE TEST HERE***
+    public static Response updateWeatherStationWithInvalidLongitudeValuesResponse(){
+        return given().
+                queryParam("appid","8dc92b60f521a3fb9e771348c8016c32").
+                when ().
+                body(updateWeatherStationWithInvalidLongitudeValuesObject ()).
+                contentType (json_contentType).
+                log ().all ().
+                put (Weather_BaseURL + "/data/3.0/stations/" + stationID).
+                then().
+                log().all ().
+                extract ().response ();
+    }
+    public static Response registerNewWeatherStationWithLongitudeAsStringResponse(){
+        return given().
+                queryParam("appid","8dc92b60f521a3fb9e771348c8016c32").
+                when ().
+                body(registerNewWeatherStationWithLongitudeAsStringObject ()).
+                contentType (json_contentType).
+                log ().all ().
+                put (Weather_BaseURL + "/data/3.0/stations/" + stationID).
+                then().
+                log().all ().
+                extract ().response ();
+    }
 
 }
