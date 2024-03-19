@@ -53,6 +53,16 @@ public class PayloadBuilder {
 
         return jsonObject;
     }
+    public  static JSONObject registerNewWeatherStationWithLongitude(){
+        JSONObject jsonObj = new JSONObject();
+        jsonObj.put("external_id : ","DBN_TEST!");
+        jsonObj.put("name : ","Durban Station");
+        jsonObj.put("latitude : ",37.76);
+        jsonObj.put("longitude : ","SAD");
+        jsonObj.put("altitude : ",150);
+        return jsonObj;
+
+    }
     public static JSONObject updateWeatherStationWithLongitudeAsStringObject(){
         JSONObject jsonObject = new JSONObject();
         jsonObject.put ("external_id", "MD_UpdTesting01");

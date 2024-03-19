@@ -235,6 +235,7 @@ public class RequestBuilder {
                 extract ().response ();
     }
 
+
     public static Response getNewWeatherStationWithNonExistingStationIDResponse(){
         return given().
                 queryParam("appid","8dc92b60f521a3fb9e771348c8016c32").
@@ -246,7 +247,12 @@ public class RequestBuilder {
                 log().all().
                 extract().response();
     }
-
+public static Response   registerNewWeatherStationWithLongitudeResponse(){
+        return given().queryParam("appid", "8dc92b60f521a3fb9e771348c8016c32").
+                when().body(registerNewWeatherStationWithLongitude()).contentType(json_contentType).
+                log().all().put(Weather_BaseURL + "/data/3.0/stations/123567890").then().
+                log().all().extract().response();
+    }
     public static Response updateWeatherStationWithLongitudeAsStringResponse(){
         return given().
                 queryParam("appid","8dc92b60f521a3fb9e771348c8016c32").

@@ -91,7 +91,15 @@ public class WeatherStationTests {
                 assertThat().
                 statusCode(Bad_Request_Status_Code);
     }
-
+    //**NEGATIVE POST TEST
+    @Description("As an api user I want to validate that the response status code is 400")
+    @Severity(SeverityLevel.CRITICAL)
+    public void registerNewWeatherStationWithLongitude(){
+         registerNewWeatherStationWithLongitudeResponse().
+                then ().
+                assertThat ().
+                statusCode (Bad_Request_Status_Code);
+    }
     @Description("As an api user I want to validate that the response status code is 400")
     @Severity(SeverityLevel.CRITICAL)
     public void updateWeatherStationWithLongitudeAsStringTests() {
@@ -100,6 +108,7 @@ public class WeatherStationTests {
                 assertThat ().
                 statusCode (Bad_Request_Status_Code);
     }
+
 
 
     @Description("As an api user i want to Register Weather Station With Empty ExternalID")
