@@ -244,6 +244,17 @@ public class RequestBuilder {
                 log().all ().
                 extract ().response ();
     }
-
+    public static Response registerNewWeatherStationWithLongitudeAsStringResponse(){
+        return given().
+                queryParam("appid","8dc92b60f521a3fb9e771348c8016c32").
+                when ().
+                body(registerNewWeatherStationWithLongitudeAsStringObject ()).
+                contentType (json_contentType).
+                log ().all ().
+                put (Weather_BaseURL + "/data/3.0/stations/" + stationID).
+                then().
+                log().all ().
+                extract ().response ();
+    }
 
 }

@@ -79,5 +79,14 @@ public class WeatherStationTests {
                 assertThat ().
                 statusCode (Bad_Request_Status_Code);
     }
+
+    @Description("As an api user I want register a Longitute as a String")
+    @Severity(SeverityLevel.CRITICAL)
+    public void registerWeatherStationWithLongitudeAsStringTests() {
+        registerNewWeatherStationWithLongitudeAsStringResponse().
+                then ().
+                assertThat ().
+                statusCode (Bad_Request_Status_Code);
+    }
 }
 
