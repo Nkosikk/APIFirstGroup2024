@@ -167,6 +167,18 @@ public class RequestBuilder {
                 log().all().
                 extract().response();
     }
+
+    public static Response patchUpdateUserResponse(){
+        return given().
+                when().
+                body(patchUpdateUserObject()).
+                contentType(json_contentType).
+                log().all().
+                patch(ReqRes_BaseURL+"/api/users/" + UserID).
+                then().
+                log().all().
+                extract().response();
+    }
     public static Response loginSuccessfullyResponse(){
         return given().
                 when().
@@ -257,4 +269,16 @@ public class RequestBuilder {
                 extract ().response ();
     }
 
+    public static Response postWeatherStationWithNameEmptyResponse(){
+        return given().
+                queryParam("appid","8dc92b60f521a3fb9e771348c8016c32").
+                when().
+                body(postWeatherStationWithNameEmptyObject()).
+                contentType(json_contentType).
+                log().all().
+                post(Weather_BaseURL+"/data/3.0/stations").
+                then().
+                log().all().
+                extract().response();
+    }
 }
