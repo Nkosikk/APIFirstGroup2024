@@ -129,5 +129,16 @@ public class WeatherStationTests {
                 assertThat ().
                 statusCode (Bad_Request_Status_Code);
     }
+    @Description("As an api user I want to validate that the response status code is 40001")
+    @Severity(SeverityLevel.CRITICAL)
+    @Test(dependsOnMethods = "registerNewWeatherStationTests")
+    public void UpdateWeatherStationWithExternalIDEmptyTest() {
+        UpdateWeatherStationWithExternalIdEmptyResponse().
+                then().
+                assertThat().
+                statusCode(Bad_Request_Status_Code).
+                body("code",notNullValue()).
+                body("message",notNullValue());
+    }
 }
 
