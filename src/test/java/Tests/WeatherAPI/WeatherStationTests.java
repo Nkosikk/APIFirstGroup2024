@@ -100,5 +100,15 @@ public class WeatherStationTests {
                 body("message", containsStringIgnoringCase ("Bad or zero length station name"));
     }
 
+    @Description("As an api user I want Get Weather Station Info with Invalid Station ID")
+    @Severity(SeverityLevel.CRITICAL)
+    public void getWeatherStationInfowithInvalidStationIDTests() {
+        getWeatherStationInfowithInvalidStationIDResponse().
+                then ().
+                assertThat ().
+                statusCode (Bad_Request_Status_Code).
+                body ("code", notNullValue ()).
+                body ("message", containsStringIgnoringCase ("Station id not valid"));
+    }
 }
 

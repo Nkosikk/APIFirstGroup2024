@@ -234,7 +234,7 @@ public class RequestBuilder {
         return given().
                 queryParam("appid","8dc92b60f521a3fb9e771348c8016c32").
                 when ().
-                body(updateWeatherStationInfoObject ()).
+                body(updateWeatherStationInfoObject()).
                 contentType (json_contentType).
                 log ().all ().
                 put (Weather_BaseURL + "/data/3.0/stations/" + stationID).
@@ -264,6 +264,17 @@ public class RequestBuilder {
                 contentType (json_contentType).
                 log ().all ().
                 put (Weather_BaseURL + "/data/3.0/stations/" + stationID).
+                then().
+                log().all ().
+                extract ().response ();
+    }
+    public static Response getWeatherStationInfowithInvalidStationIDResponse(){
+        return given().
+                queryParam("appid","8dc92b60f521a3fb9e771348c8016c32").
+                when ().
+                contentType (json_contentType).
+                log ().all ().
+                get (Weather_BaseURL + "/data/3.0/stations/InvalidStationID").
                 then().
                 log().all ().
                 extract ().response ();
