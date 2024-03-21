@@ -129,5 +129,17 @@ public class WeatherStationTests {
                 assertThat ().
                 statusCode (Bad_Request_Status_Code);
     }
+
+    @Description("As an api user i want to delete a Weather Station")
+    @Severity(SeverityLevel.CRITICAL)
+    @Test(dependsOnMethods = {"registerNewWeatherStationTests","updateWeatherStationInfoTests","getNewWeatherStationInfoTests"})
+    public void DeleteWeatherStationTest() {
+        DeleteWeatherStationResponse().
+                then().
+                assertThat().
+                statusCode(delete_Success_Status_Code);
+
+    }
+
 }
 

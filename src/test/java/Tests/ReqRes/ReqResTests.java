@@ -96,5 +96,13 @@ public class ReqResTests {
                 body("error", containsStringIgnoringCase ("Missing password"));
     }
 
+    @Description("As an api user i want to get 'Not Found' error for single user ")
+    @Severity(SeverityLevel.CRITICAL)
+    public void getSingleUserNotFoundTest(){
+        getSingleUserNotFoundResponse().
+                then().
+                assertThat().
+                statusCode(Not_Found_Status_Code);
+    }
 
 }
