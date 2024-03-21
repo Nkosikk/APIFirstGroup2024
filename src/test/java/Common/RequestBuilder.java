@@ -202,7 +202,20 @@ public class RequestBuilder {
                 log().all().
                 extract().response();
     }
-    //*** WEATHER STARTS HERE***
+
+
+    public static Response getSingleResourceResponse() {
+        return given().
+                when().
+                contentType(json_contentType).
+                log().all().
+                get(ReqRes_BaseURL + "/api/unknown/2").
+                then().
+                log().all().
+                extract().response();
+    }
+
+        //*** WEATHER STARTS HERE***
     public static Response registerNewWeatherStationResponse(){
         Response response =  given().
                 queryParam("appid","8dc92b60f521a3fb9e771348c8016c32").
