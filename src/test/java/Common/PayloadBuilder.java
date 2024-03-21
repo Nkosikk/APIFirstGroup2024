@@ -15,6 +15,7 @@ public class PayloadBuilder {
     public static JSONObject updateUserObject(){
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("name","Letho");
+        jsonObject.put("surname","Mjoli");
         jsonObject.put("job","tester");
         jsonObject.put("Address","34 Aberdeen road");
 
