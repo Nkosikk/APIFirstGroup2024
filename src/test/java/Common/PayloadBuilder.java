@@ -20,6 +20,15 @@ public class PayloadBuilder {
 
         return jsonObject;
 }
+
+    public static JSONObject patchUpdateUserObject(){
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("name","Que");
+        jsonObject.put("job","tester");
+
+        return jsonObject;
+    }
+
     public static JSONObject loginSuccessfullyObject(){
         JSONObject jsonObject = new JSONObject();
         jsonObject.put ("email","eve.holt@reqres.in");
@@ -70,6 +79,17 @@ public class PayloadBuilder {
         jsonObject.put("external_id","MD_Testing01");
         jsonObject.put("latitude",37.76);
         jsonObject.put("longitude","dbl-to-string");
+        jsonObject.put("altitude",150);
+
+        return jsonObject;
+    }
+
+    public static JSONObject postWeatherStationWithNameEmptyObject(){
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("external_id","MD_Testing01");
+        jsonObject.put ("name","");
+        jsonObject.put("latitude",37.76);
+        jsonObject.put("longitude",-122.43);
         jsonObject.put("altitude",150);
 
         return jsonObject;

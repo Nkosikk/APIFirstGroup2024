@@ -88,6 +88,18 @@ public class WeatherStationTests {
                 assertThat ().
                 statusCode (Bad_Request_Status_Code);
     }
+
+    @Description("As an api user i want to Register Weather Station With Name Empty")
+    @Severity(SeverityLevel.CRITICAL)
+    public void postWeatherStationWithNameEmptyTests() {
+        postWeatherStationWithNameEmptyResponse().
+                then().
+                assertThat().
+                statusCode (Bad_Request_Status_Code).
+                body("code", notNullValue()).
+                body("message", containsStringIgnoringCase ("Bad or zero length station name"));
+    }
+
     @Description("As an api user I want Get Weather Station Info with Invalid Station ID")
     @Severity(SeverityLevel.CRITICAL)
     public void getWeatherStationInfowithInvalidStationIDTests() {

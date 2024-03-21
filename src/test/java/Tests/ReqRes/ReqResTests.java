@@ -50,6 +50,18 @@ public class ReqResTests {
                 body("updatedAt", notNullValue());
     }
 
+    @Description("As an api user i want to update User")
+    @Severity(SeverityLevel.CRITICAL)
+    public void patchUpdateUserTests() {
+        patchUpdateUserResponse().
+                then().
+                assertThat().
+                statusCode(Success_Status_Code).
+                body("name", containsStringIgnoringCase("Que")).
+                body("job", containsStringIgnoringCase("Tester")).
+                body("updatedAt", notNullValue());
+    }
+
     @Description("This is to display a list of resources")
     @Severity(SeverityLevel.CRITICAL)
     public void getListResourceTests(){
