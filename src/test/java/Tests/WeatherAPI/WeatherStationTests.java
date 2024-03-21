@@ -110,5 +110,24 @@ public class WeatherStationTests {
                 body ("code", notNullValue ()).
                 body ("message", containsStringIgnoringCase ("Station id not valid"));
     }
+
+    @Test(dependsOnMethods = "registerNewWeatherStationTests")
+    @Description("As an api user I want to validate that the response status code is 400")
+    @Severity(SeverityLevel.CRITICAL)
+    public void getNewWeatherStationWithNonExistingStationIDTests() {
+        getNewWeatherStationWithNonExistingStationIDResponse().
+                then().
+                assertThat().
+                statusCode(Bad_Request_Status_Code);
+    }
+    @Test(dependsOnMethods = "registerNewWeatherStationTests")
+    @Description("As an api user I want to validate that the response status code is 400")
+    @Severity(SeverityLevel.CRITICAL)
+    public void updateWeatherStationWithLongitudeAsStringTests() {
+        updateWeatherStationWithLongitudeAsStringResponse().
+                then ().
+                assertThat ().
+                statusCode (Bad_Request_Status_Code);
+    }
 }
 
