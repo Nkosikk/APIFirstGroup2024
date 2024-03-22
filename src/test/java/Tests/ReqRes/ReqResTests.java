@@ -47,10 +47,7 @@ public class ReqResTests {
                 then().
                 assertThat().
                 statusCode(Success_Status_Code).
-               // body("page",is(2)).//body("per_page",is(6)).
-              //body("total", is(12)).
-              //body("total_pages", is(2)).// body("data", hasSize(6)).
-              body("support", notNullValue());
+                body("support", notNullValue());
     }
     public void updateUserTests() {
         updateUserResponse().
