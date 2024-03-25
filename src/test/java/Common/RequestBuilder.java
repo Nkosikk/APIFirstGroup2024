@@ -317,4 +317,23 @@ public class RequestBuilder {
                 extract ().response ();
     }
 
+    public static Response postWeatherStationWithEmptyExternalIDResponse() {
+        //JSONObject requestBody = new JSONObject();
+        // requestBody.put("external_id", ""); // Empty ExternalID
+
+        return given()
+                .queryParam("appid", "8dc92b60f521a3fb9e771348c8016c32")
+                //.body(requestBody.toString())
+                .when().
+                body(registerWeatherStationWithoutExtenalIDObject())
+                .contentType(json_contentType)
+                .log().all()
+                .post(Weather_BaseURL + "/data/3.0/stations")
+                .then()
+                .log().all()
+                .extract().response();
+    }
+
+
+
 }
