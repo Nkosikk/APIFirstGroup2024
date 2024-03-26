@@ -6,6 +6,7 @@ import org.apache.http.HttpStatus;
 import org.testng.annotations.Test;
 
 import static Common.CommonTestData.*;
+import static Common.PayloadBuilder.generateTestData;
 import static Common.RequestBuilder.*;
 import static org.hamcrest.Matchers.*;
 
@@ -21,8 +22,8 @@ public class ReqResTests {
                 then().
                 assertThat().
                 statusCode(Create_Success_Status_Code).
-                body("name",containsStringIgnoringCase("Nkosi")).
-                body("job",containsStringIgnoringCase("Tester")).
+                body("name",containsStringIgnoringCase(generateTestData.FirstName)).
+                body("job",containsStringIgnoringCase(generateTestData.jobTitle)).
                 body("id", notNullValue()).
                 body("createdAt", notNullValue());
     }

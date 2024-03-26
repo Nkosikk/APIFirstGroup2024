@@ -5,10 +5,12 @@ import org.testng.annotations.Test;
 
 public class PayloadBuilder {
 
+    public static GenerateTestData generateTestData = new GenerateTestData();
+
     public static JSONObject createUserObject(){
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("name","Nkosi");
-        jsonObject.put("job","tester");
+        jsonObject.put("name",generateTestData.FirstName);
+        jsonObject.put("job",generateTestData.jobTitle);
 
         return jsonObject;
     }
