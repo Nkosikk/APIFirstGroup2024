@@ -2,6 +2,7 @@ package Tests.ReqRes;
 
 import groovyjarjarantlr4.v4.runtime.misc.NotNull;
 import io.qameta.allure.*;
+import org.apache.http.HttpStatus;
 import org.testng.annotations.Test;
 
 import static Common.CommonTestData.*;
@@ -112,6 +113,14 @@ public class ReqResTests {
                 then().
                 assertThat().
                 statusCode(Not_Found_Status_Code);
+    }
+    @Description("As an api user i want to get 'Resource Not Found' error ")
+    @Severity(SeverityLevel.CRITICAL)
+    public void getSingleResourceNotFoundTest(){
+        getSingleResourceNotFoundResponse().
+                then().
+                assertThat().
+                statusCode(HttpStatus.SC_NOT_FOUND);
     }
 
 }

@@ -150,5 +150,18 @@ public class WeatherStationTests {
                 assertThat ().
                 statusCode (Bad_Request_Status_Code);
     }
+    @Description("As an api user I want to Register Weather Station With Empty ExternalID")
+    @Severity(SeverityLevel.CRITICAL)
+    public void registerWeatherStationWithoutExtenalIDObject() {
+        postWeatherStationWithEmptyExternalIDResponse()
+                .then()
+                .assertThat()
+                .statusCode(Bad_Request_Status_Code)
+                .body("code", notNullValue())
+                .body("message", containsStringIgnoringCase("Bad external id"));
+    }
+
+
+
 }
 
