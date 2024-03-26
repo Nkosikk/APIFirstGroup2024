@@ -1,11 +1,15 @@
 package Common;
 
 import groovy.xml.StreamingDOMBuilder;
+import io.qameta.allure.Description;
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import org.testng.annotations.Test;
 
 import static Common.BasePaths.*;
+import static Common.CommonTestData.Bad_Request_Status_Code;
 import static Common.ContentTypes.json_contentType;
 import static Common.PayloadBuilder.*;
 import static io.restassured.RestAssured.given;
@@ -168,6 +172,17 @@ public class RequestBuilder {
                 extract().response();
     }
 
+    public static Response getSingleUserResponse(){
+        return given().
+                when().
+                contentType(json_contentType).
+                log().all().
+                get(ReqRes_BaseURL+"/api/users/2").
+                then().
+                log().all().
+                extract().response();
+    }
+
     public static Response patchUpdateUserResponse(){
         return given().
                 when().
@@ -259,6 +274,19 @@ public class RequestBuilder {
                 queryParam("appid","8dc92b60f521a3fb9e771348c8016c32").
                 when ().
                 body(updateWeatherStationWithInvalidLongitudeValuesObject ()).
+                contentType (json_contentType).
+                log ().all ().
+                put (Weather_BaseURL + "/data/3.0/stations/" + stationID).
+                then().
+                log().all ().
+                extract ().response ();
+    }
+
+    public static Response updateWeatherStationWithMissingFieldResponse(){
+        return given().
+                queryParam("appid","8dc92b60f521a3fb9e771348c8016c32").
+                when ().
+                body(updateWeatherStationWithMissingFieldObject()).
                 contentType (json_contentType).
                 log ().all ().
                 put (Weather_BaseURL + "/data/3.0/stations/" + stationID).

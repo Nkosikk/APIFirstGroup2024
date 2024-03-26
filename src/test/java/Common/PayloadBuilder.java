@@ -75,6 +75,16 @@ public class PayloadBuilder {
         return jsonObject;
     }
 
+    public static JSONObject updateWeatherStationWithMissingFieldObject() {
+        JSONObject jsonObject = new JSONObject ();
+        jsonObject.put ("external_id", "MD_UpdTesting01");
+        jsonObject.put ("latitude", 37.76);
+        jsonObject.put ("longitude", -122.43);
+        jsonObject.put ("altitude", 150);
+
+        return jsonObject;
+    }
+
     public static JSONObject registerNewWeatherStationWithLongitudeAsStringObject(){
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("external_id","MD_Testing01");

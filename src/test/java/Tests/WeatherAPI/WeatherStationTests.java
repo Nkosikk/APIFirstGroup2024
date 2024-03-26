@@ -141,5 +141,14 @@ public class WeatherStationTests {
 
     }
 
+
+    @Description("As an api user I want to Update Weather Station Information Missing Field - Name")
+    @Severity(SeverityLevel.CRITICAL)
+    public void updateWeatherStationWithMissingFieldTests() {
+        updateWeatherStationWithMissingFieldResponse ().
+                then ().
+                assertThat ().
+                statusCode (Bad_Request_Status_Code);
+    }
 }
 

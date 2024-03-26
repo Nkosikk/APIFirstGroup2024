@@ -40,6 +40,14 @@ public class ReqResTests {
                 body("data", hasSize(6)).
                 body("support", notNullValue());
     }
+
+    public void getSingleUserTest(){
+        getSingleUserResponse().
+                then().
+                assertThat().
+                statusCode(Success_Status_Code).
+                body("support", notNullValue());
+    }
     public void updateUserTests() {
         updateUserResponse().
                 then().
