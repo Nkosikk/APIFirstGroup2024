@@ -183,6 +183,50 @@ public class RequestBuilder {
                 extract().response();
     }
 
+    public static Response patchUpdateUserResponse(){
+        return given().
+                when().
+                body(patchUpdateUserObject()).
+                contentType(json_contentType).
+                log().all().
+                patch(ReqRes_BaseURL+"/api/users/" + UserID).
+                then().
+                log().all().
+                extract().response();
+    }
+    public static Response loginSuccessfullyResponse(){
+        return given().
+                when().
+                body(loginSuccessfullyObject()).
+                contentType(json_contentType).
+                log().all().
+                post (ReqRes_BaseURL+"/api/login").
+                then().
+                log().all().
+                extract().response();
+    }
+
+    public static Response loginUnSuccessfullyResponse(){
+        return given().
+                when().
+                body(loginUnSuccessfullyObject()).
+                contentType(json_contentType).
+                log().all().
+                post (ReqRes_BaseURL+"/api/login").
+                then().
+                log().all().
+                extract().response();
+    }
+    public static Response getSingleUserNotFoundResponse(){
+        return given().
+                when().
+                contentType(json_contentType).
+                log().all().
+                get(ReqRes_BaseURL+"/api/users/23").
+                then().
+                log().all().
+                extract().response();
+    }
     //*** WEATHER STARTS HERE***
     public static Response registerNewWeatherStationResponse(){
         Response response =  given().
@@ -215,7 +259,7 @@ public class RequestBuilder {
         return given().
                 queryParam("appid","8dc92b60f521a3fb9e771348c8016c32").
                 when ().
-                body(updateWeatherStationInfoObject ()).
+                body(updateWeatherStationInfoObject()).
                 contentType (json_contentType).
                 log ().all ().
                 put (Weather_BaseURL + "/data/3.0/stations/" + stationID).
@@ -249,6 +293,77 @@ public class RequestBuilder {
                 then().
                 log().all ().
                 extract ().response ();
+    }
+    public static Response registerNewWeatherStationWithLongitudeAsStringResponse(){
+        return given().
+                queryParam("appid","8dc92b60f521a3fb9e771348c8016c32").
+                when ().
+                body(registerNewWeatherStationWithLongitudeAsStringObject ()).
+                contentType (json_contentType).
+                log ().all ().
+                put (Weather_BaseURL + "/data/3.0/stations/" + stationID).
+                then().
+                log().all ().
+                extract ().response ();
+    }
+    public static Response getWeatherStationInfowithInvalidStationIDResponse(){
+        return given().
+                queryParam("appid","8dc92b60f521a3fb9e771348c8016c32").
+                when ().
+                contentType (json_contentType).
+                log ().all ().
+                get (Weather_BaseURL + "/data/3.0/stations/InvalidStationID").
+                then().
+                log().all ().
+                extract ().response ();
+    }
+
+    public static Response postWeatherStationWithNameEmptyResponse(){
+        return given().
+                queryParam("appid","8dc92b60f521a3fb9e771348c8016c32").
+                when().
+                body(postWeatherStationWithNameEmptyObject()).
+                contentType(json_contentType).
+                log().all().
+                post(Weather_BaseURL+"/data/3.0/stations").
+                then().
+                log().all().
+                extract().response();
+    }
+    public static Response getNewWeatherStationWithNonExistingStationIDResponse(){
+        return given().
+                queryParam("appid","8dc92b60f521a3fb9e771348c8016c32").
+                when().
+                contentType(json_contentType).
+                log().all().
+                get(Weather_BaseURL+"/data/3.0/stations/123567890").
+                then().
+                log().all().
+                extract().response();
+    }
+
+    public static Response updateWeatherStationWithLongitudeAsStringResponse(){
+        return given().
+                queryParam("appid","8dc92b60f521a3fb9e771348c8016c32").
+                when ().
+                body(updateWeatherStationWithLongitudeAsStringObject()).
+                contentType (json_contentType).
+                log ().all ().
+                put (Weather_BaseURL + "/data/3.0/stations/" + stationID).
+                then().
+                log().all ().
+                extract ().response ();
+    }
+    public static Response DeleteWeatherStationResponse(){
+        return given().
+                queryParam("appid","8dc92b60f521a3fb9e771348c8016c32").
+                when().
+                contentType(json_contentType).
+                log().all().
+                delete(Weather_BaseURL+"/data/3.0/stations/"+ stationID).
+                then().
+                log().all().
+                extract().response();
     }
 
 }

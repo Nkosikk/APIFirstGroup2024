@@ -4,8 +4,7 @@ import groovyjarjarantlr4.v4.runtime.misc.NotNull;
 import io.qameta.allure.*;
 import org.testng.annotations.Test;
 
-import static Common.CommonTestData.Create_Success_Status_Code;
-import static Common.CommonTestData.Success_Status_Code;
+import static Common.CommonTestData.*;
 import static Common.RequestBuilder.*;
 import static org.hamcrest.Matchers.*;
 
@@ -55,6 +54,19 @@ public class ReqResTests {
                 assertThat().
                 statusCode(Success_Status_Code).
                 body("name", containsStringIgnoringCase("Letho")).
+                body("surname", containsStringIgnoringCase("Mjoli")).
+                body("job", containsStringIgnoringCase("Tester")).
+                body("updatedAt", notNullValue());
+    }
+
+    @Description("As an api user i want to update User")
+    @Severity(SeverityLevel.CRITICAL)
+    public void patchUpdateUserTests() {
+        patchUpdateUserResponse().
+                then().
+                assertThat().
+                statusCode(Success_Status_Code).
+                body("name", containsStringIgnoringCase("Que")).
                 body("job", containsStringIgnoringCase("Tester")).
                 body("updatedAt", notNullValue());
     }
@@ -73,4 +85,33 @@ public class ReqResTests {
                 body("data", hasSize(6)).
                 body("support", notNullValue());
     }
+
+    @Description("This is to log in successfully")
+    @Severity(SeverityLevel.CRITICAL)
+    public void loginSuccessfullyTests() {
+        loginSuccessfullyResponse().
+                then().
+                assertThat().
+                statusCode(Success_Status_Code).
+                body("token", containsStringIgnoringCase("QpwL5tke4Pnpja7X4"));
+    }
+    @Description("This is to log in unsuccessfully")
+    @Severity(SeverityLevel.CRITICAL)
+    public void loginUnSuccessfullyTests() {
+        loginUnSuccessfullyResponse().
+                then().
+                assertThat().
+                statusCode(Bad_Request_Status_Code).
+                body("error", containsStringIgnoringCase ("Missing password"));
+    }
+
+    @Description("As an api user i want to get 'Not Found' error for single user ")
+    @Severity(SeverityLevel.CRITICAL)
+    public void getSingleUserNotFoundTest(){
+        getSingleUserNotFoundResponse().
+                then().
+                assertThat().
+                statusCode(Not_Found_Status_Code);
+    }
+
 }

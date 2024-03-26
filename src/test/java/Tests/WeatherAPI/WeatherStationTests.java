@@ -80,6 +80,68 @@ public class WeatherStationTests {
                 statusCode (Bad_Request_Status_Code);
     }
 
+    @Description("As an api user I want register a Longitute as a String")
+    @Severity(SeverityLevel.CRITICAL)
+    public void registerWeatherStationWithLongitudeAsStringTests() {
+        registerNewWeatherStationWithLongitudeAsStringResponse().
+                then ().
+                assertThat ().
+                statusCode (Bad_Request_Status_Code);
+    }
+
+    @Description("As an api user i want to Register Weather Station With Name Empty")
+    @Severity(SeverityLevel.CRITICAL)
+    public void postWeatherStationWithNameEmptyTests() {
+        postWeatherStationWithNameEmptyResponse().
+                then().
+                assertThat().
+                statusCode (Bad_Request_Status_Code).
+                body("code", notNullValue()).
+                body("message", containsStringIgnoringCase ("Bad or zero length station name"));
+    }
+
+    @Description("As an api user I want Get Weather Station Info with Invalid Station ID")
+    @Severity(SeverityLevel.CRITICAL)
+    public void getWeatherStationInfowithInvalidStationIDTests() {
+        getWeatherStationInfowithInvalidStationIDResponse().
+                then ().
+                assertThat ().
+                statusCode (Bad_Request_Status_Code).
+                body ("code", notNullValue ()).
+                body ("message", containsStringIgnoringCase ("Station id not valid"));
+    }
+
+    @Test(dependsOnMethods = "registerNewWeatherStationTests")
+    @Description("As an api user I want to validate that the response status code is 400")
+    @Severity(SeverityLevel.CRITICAL)
+    public void getNewWeatherStationWithNonExistingStationIDTests() {
+        getNewWeatherStationWithNonExistingStationIDResponse().
+                then().
+                assertThat().
+                statusCode(Bad_Request_Status_Code);
+    }
+    @Test(dependsOnMethods = "registerNewWeatherStationTests")
+    @Description("As an api user I want to validate that the response status code is 400")
+    @Severity(SeverityLevel.CRITICAL)
+    public void updateWeatherStationWithLongitudeAsStringTests() {
+        updateWeatherStationWithLongitudeAsStringResponse().
+                then ().
+                assertThat ().
+                statusCode (Bad_Request_Status_Code);
+    }
+
+    @Description("As an api user i want to delete a Weather Station")
+    @Severity(SeverityLevel.CRITICAL)
+    @Test(dependsOnMethods = {"registerNewWeatherStationTests","updateWeatherStationInfoTests","getNewWeatherStationInfoTests"})
+    public void DeleteWeatherStationTest() {
+        DeleteWeatherStationResponse().
+                then().
+                assertThat().
+                statusCode(delete_Success_Status_Code);
+
+    }
+
+
     @Description("As an api user I want to Update Weather Station Information Missing Field - Name")
     @Severity(SeverityLevel.CRITICAL)
     public void updateWeatherStationWithMissingFieldTests() {
