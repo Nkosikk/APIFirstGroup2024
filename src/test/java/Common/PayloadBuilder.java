@@ -15,6 +15,7 @@ public class PayloadBuilder {
     public static JSONObject updateUserObject(){
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("name","Letho");
+        jsonObject.put("surname","Mjoli");
         jsonObject.put("job","tester");
         jsonObject.put("Address","34 Aberdeen road");
 
@@ -74,6 +75,16 @@ public class PayloadBuilder {
         return jsonObject;
     }
 
+    public static JSONObject updateWeatherStationWithMissingFieldObject() {
+        JSONObject jsonObject = new JSONObject ();
+        jsonObject.put ("external_id", "MD_UpdTesting01");
+        jsonObject.put ("latitude", 37.76);
+        jsonObject.put ("longitude", -122.43);
+        jsonObject.put ("altitude", 150);
+
+        return jsonObject;
+    }
+
     public static JSONObject registerNewWeatherStationWithLongitudeAsStringObject(){
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("external_id","MD_Testing01");
@@ -101,6 +112,17 @@ public class PayloadBuilder {
         jsonObject.put ("latitude", 37.76);
         jsonObject.put ("longitude", "SAD");
         jsonObject.put ("altitude", 150);
+
+        return jsonObject;
+    }
+
+    public static JSONObject registerWeatherStationWithoutExtenalIDObject(){
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("external_id","");
+        jsonObject.put("name","Midrand Test Station");
+        jsonObject.put("latitude",37.76);
+        jsonObject.put("longitude",-122.43);
+        jsonObject.put("altitude",150);
 
         return jsonObject;
     }

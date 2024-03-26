@@ -2,6 +2,7 @@ package Tests.ReqRes;
 
 import groovyjarjarantlr4.v4.runtime.misc.NotNull;
 import io.qameta.allure.*;
+import org.apache.http.HttpStatus;
 import org.testng.annotations.Test;
 
 import static Common.CommonTestData.*;
@@ -40,12 +41,21 @@ public class ReqResTests {
                 body("data", hasSize(6)).
                 body("support", notNullValue());
     }
+
+    public void getSingleUserTest(){
+        getSingleUserResponse().
+                then().
+                assertThat().
+                statusCode(Success_Status_Code).
+                body("support", notNullValue());
+    }
     public void updateUserTests() {
         updateUserResponse().
                 then().
                 assertThat().
                 statusCode(Success_Status_Code).
                 body("name", containsStringIgnoringCase("Letho")).
+                body("surname", containsStringIgnoringCase("Mjoli")).
                 body("job", containsStringIgnoringCase("Tester")).
                 body("updatedAt", notNullValue());
     }
@@ -96,6 +106,22 @@ public class ReqResTests {
                 body("error", containsStringIgnoringCase ("Missing password"));
     }
 
+    @Description("As an api user i want to get 'Not Found' error for single user ")
+    @Severity(SeverityLevel.CRITICAL)
+    public void getSingleUserNotFoundTest(){
+        getSingleUserNotFoundResponse().
+                then().
+                assertThat().
+                statusCode(Not_Found_Status_Code);
+    }
+    @Description("As an api user i want to get 'Resource Not Found' error ")
+    @Severity(SeverityLevel.CRITICAL)
+    public void getSingleResourceNotFoundTest(){
+        getSingleResourceNotFoundResponse().
+                then().
+                assertThat().
+                statusCode(HttpStatus.SC_NOT_FOUND);
+    }
 
     @Description("This is to display a single resource")
     @Severity(SeverityLevel.CRITICAL)

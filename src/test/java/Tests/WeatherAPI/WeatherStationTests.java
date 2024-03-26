@@ -140,5 +140,39 @@ public class WeatherStationTests {
                 body("code",notNullValue()).
                 body("message",notNullValue());
     }
+
+    @Description("As an api user i want to delete a Weather Station")
+    @Severity(SeverityLevel.CRITICAL)
+    @Test(dependsOnMethods = {"registerNewWeatherStationTests","updateWeatherStationInfoTests","getNewWeatherStationInfoTests"})
+    public void DeleteWeatherStationTest() {
+        DeleteWeatherStationResponse().
+                then().
+                assertThat().
+                statusCode(delete_Success_Status_Code);
+
+    }
+
+
+    @Description("As an api user I want to Update Weather Station Information Missing Field - Name")
+    @Severity(SeverityLevel.CRITICAL)
+    public void updateWeatherStationWithMissingFieldTests() {
+        updateWeatherStationWithMissingFieldResponse ().
+                then ().
+                assertThat ().
+                statusCode (Bad_Request_Status_Code);
+    }
+    @Description("As an api user I want to Register Weather Station With Empty ExternalID")
+    @Severity(SeverityLevel.CRITICAL)
+    public void registerWeatherStationWithoutExtenalIDObject() {
+        postWeatherStationWithEmptyExternalIDResponse()
+                .then()
+                .assertThat()
+                .statusCode(Bad_Request_Status_Code)
+                .body("code", notNullValue())
+                .body("message", containsStringIgnoringCase("Bad external id"));
+    }
+
+
+
 }
 
