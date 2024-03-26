@@ -43,7 +43,7 @@ public class DogsAPiTests {
                 assertThat().
                 statusCode(Success_Status_Code).
                 body("message", notNullValue()).
-                body("status",containsStringIgnoringCase("success"));
+                body("status",containsStringIgnoringCase("successNkosi"));
     }
 
     @Description("As an api user i want to get Breeds List")
