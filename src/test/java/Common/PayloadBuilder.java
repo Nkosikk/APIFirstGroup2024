@@ -15,6 +15,7 @@ public class PayloadBuilder {
     public static JSONObject updateUserObject(){
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("name","Letho");
+        jsonObject.put("surname","Mjoli");
         jsonObject.put("job","tester");
         jsonObject.put("Address","34 Aberdeen road");
 
@@ -70,6 +71,16 @@ public class PayloadBuilder {
     public static JSONObject updateWeatherStationWithInvalidLongitudeValuesObject() {
         JSONObject jsonObject = new JSONObject ();
         jsonObject.put ("longitude", 200.50);
+
+        return jsonObject;
+    }
+
+    public static JSONObject updateWeatherStationWithMissingFieldObject() {
+        JSONObject jsonObject = new JSONObject ();
+        jsonObject.put ("external_id", "MD_UpdTesting01");
+        jsonObject.put ("latitude", 37.76);
+        jsonObject.put ("longitude", -122.43);
+        jsonObject.put ("altitude", 150);
 
         return jsonObject;
     }

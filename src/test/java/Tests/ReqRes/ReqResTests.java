@@ -41,12 +41,21 @@ public class ReqResTests {
                 body("data", hasSize(6)).
                 body("support", notNullValue());
     }
+
+    public void getSingleUserTest(){
+        getSingleUserResponse().
+                then().
+                assertThat().
+                statusCode(Success_Status_Code).
+                body("support", notNullValue());
+    }
     public void updateUserTests() {
         updateUserResponse().
                 then().
                 assertThat().
                 statusCode(Success_Status_Code).
                 body("name", containsStringIgnoringCase("Letho")).
+                body("surname", containsStringIgnoringCase("Mjoli")).
                 body("job", containsStringIgnoringCase("Tester")).
                 body("updatedAt", notNullValue());
     }
@@ -95,6 +104,15 @@ public class ReqResTests {
                 assertThat().
                 statusCode(Bad_Request_Status_Code).
                 body("error", containsStringIgnoringCase ("Missing password"));
+    }
+
+    @Description("As an api user i want to get 'Not Found' error for single user ")
+    @Severity(SeverityLevel.CRITICAL)
+    public void getSingleUserNotFoundTest(){
+        getSingleUserNotFoundResponse().
+                then().
+                assertThat().
+                statusCode(Not_Found_Status_Code);
     }
     @Description("As an api user i want to get 'Resource Not Found' error ")
     @Severity(SeverityLevel.CRITICAL)
