@@ -123,4 +123,15 @@ public class ReqResTests {
                 statusCode(HttpStatus.SC_NOT_FOUND);
     }
 
+    @Description("This is to display a single resource")
+    @Severity(SeverityLevel.CRITICAL)
+    public void getSingleResource() {
+        getSingleResourceResponse().
+                then().
+                assertThat().
+
+                statusCode(Success_Status_Code).
+                body("data", notNullValue()).
+                body("support", notNullValue());
+    }
 }

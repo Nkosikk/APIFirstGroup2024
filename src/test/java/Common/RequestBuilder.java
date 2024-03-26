@@ -228,6 +228,20 @@ public class RequestBuilder {
                 extract().response();
     }
     //*** WEATHER STARTS HERE***
+
+
+    public static Response getSingleResourceResponse() {
+        return given().
+                when().
+                contentType(json_contentType).
+                log().all().
+                get(ReqRes_BaseURL + "/api/unknown/2").
+                then().
+                log().all().
+                extract().response();
+    }
+
+        //*** WEATHER STARTS HERE***
     public static Response registerNewWeatherStationResponse(){
         Response response =  given().
                 queryParam("appid","8dc92b60f521a3fb9e771348c8016c32").
@@ -395,4 +409,16 @@ public class RequestBuilder {
     }
 
 
-}
+    public static Response UpdateWeatherStationWithExternalIdEmptyResponse() {
+        return given().
+                queryParam("appid", "8dc92b60f521a3fb9e771348c8016c32").
+                when().
+                body(UpdateWeatherStationWithExternalIDempty()).
+                contentType(json_contentType).
+                log().all().
+                put(Weather_BaseURL + "/data/3.0/stations/" + stationID).
+                then().
+                log().all().
+                extract().response();
+    }
+    }
