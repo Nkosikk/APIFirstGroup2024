@@ -2,7 +2,6 @@ package Tests.ReqRes;
 
 import groovyjarjarantlr4.v4.runtime.misc.NotNull;
 import io.qameta.allure.*;
-import org.apache.http.HttpStatus;
 import org.testng.annotations.Test;
 
 import static Common.CommonTestData.*;
@@ -13,8 +12,72 @@ import static org.hamcrest.Matchers.*;
 @Feature("Req Res")
 @Story("Create new user")
 public class ReqResTests {
+    @Description("As an api user I want to get List of Users")
+    @Severity(SeverityLevel.CRITICAL)
+    public void getListUsersTests(){
+        getListUsersResponse().
+                then().
+                assertThat().
+                statusCode(Success_Status_Code).
+                body(containsString("Michael")).
+                body(containsString("Lindsay")).
+                body(containsString("Tobias"));
+    }
 
-    @Description("As an api user i want to create a new user")
+    @Description("As an api user I want to get a single user")
+    @Severity(SeverityLevel.CRITICAL)
+    public void getSingleUserTest(){
+        getSingleUserResponse().
+                then().
+                assertThat().
+                statusCode(Success_Status_Code).
+                body(containsString("Janet"));
+
+    }
+
+    @Description("As an api user I want to get the single user that is not found")
+    @Severity(SeverityLevel.CRITICAL)
+    public void getSingleUserNotFoundTest(){
+        getSingleUserNotFoundResponse().
+                then().
+                assertThat().
+                statusCode(Not_Found_Status_Code);
+
+    }
+
+    @Description("As an API user I want to display a list of resources")
+    @Severity(SeverityLevel.CRITICAL)
+    public void getListResourcesTests(){
+        getListResourcesResponse ().
+                then().
+                assertThat().
+                statusCode(Success_Status_Code).
+                body(containsString("cerulean")).
+                body(containsString("fuchsia rose")).
+                body(containsString("true red"));
+    }
+
+
+    @Description("As an API user I want to display a single resources")
+    @Severity(SeverityLevel.CRITICAL)
+    public void getSingleResourceTests(){
+        getSingleResourceResponse ().
+                then().
+                assertThat().
+                statusCode(Success_Status_Code).
+                body(containsString("fuchsia rose"));
+    }
+
+    @Description("As an API user I want to display a single resources")
+    @Severity(SeverityLevel.CRITICAL)
+    public void getSingleResourceNotFoundTests(){
+        getSingleResourceNotFoundResponse ().
+                then().
+                assertThat().
+                statusCode(Not_Found_Status_Code);
+    }
+
+    @Description("As an api user I want to create a new user")
     @Severity(SeverityLevel.CRITICAL)
     public void createUserTests(){
         createUserResponse().
@@ -27,68 +90,55 @@ public class ReqResTests {
                 body("createdAt", notNullValue());
     }
 
-@Description("As an api user i want to get List of Users ")
-@Severity(SeverityLevel.CRITICAL)
-    public void getListUsersTest(){
-        getListUsersResponse().
-                then().
-                assertThat().
-                statusCode(Success_Status_Code).
-                body("page",is(2)).
-                body("per_page",is(6)).
-                body("total", is(12)).
-                body("total_pages", is(2)).
-                body("data", hasSize(6)).
-                body("support", notNullValue());
-    }
-
-    public void getSingleUserTest(){
-        getSingleUserResponse().
-                then().
-                assertThat().
-                statusCode(Success_Status_Code).
-                body("support", notNullValue());
-    }
+    @Description("As an api user I want to update user's information")
+    @Severity(SeverityLevel.CRITICAL)
     public void updateUserTests() {
         updateUserResponse().
                 then().
                 assertThat().
                 statusCode(Success_Status_Code).
                 body("name", containsStringIgnoringCase("Letho")).
-                body("surname", containsStringIgnoringCase("Mjoli")).
+                body("job", containsStringIgnoringCase("Tester")).
+                body("Address", containsStringIgnoringCase("34 Aberdeen road")).
+                body("updatedAt", notNullValue());
+    }
+
+    @Description("As an api user I want to add a missing required field for the user")
+    @Severity(SeverityLevel.CRITICAL)
+    public void patchUserTests() {
+        patchUserResponse().
+                then().
+                assertThat().
+                statusCode(Success_Status_Code).
+                body("name", containsStringIgnoringCase("Letho")).
                 body("job", containsStringIgnoringCase("Tester")).
                 body("updatedAt", notNullValue());
     }
 
-    @Description("As an api user i want to update User")
-    @Severity(SeverityLevel.CRITICAL)
-    public void patchUpdateUserTests() {
-        patchUpdateUserResponse().
+    public void deleteUserTests() {
+        deleteUserResponse().
+                then().
+                assertThat().
+                statusCode(delete_Status_Code);
+    }
+
+    public void registerSuccessfullyTests() {
+        registerSuccessfullyResponse().
                 then().
                 assertThat().
                 statusCode(Success_Status_Code).
-                body("name", containsStringIgnoringCase("Que")).
-                body("job", containsStringIgnoringCase("Tester")).
-                body("updatedAt", notNullValue());
+                body("id", notNullValue ()).
+                body("token", containsStringIgnoringCase("QpwL5tke4Pnpja7X4"));
     }
 
-    @Description("This is to display a list of resources")
-    @Severity(SeverityLevel.CRITICAL)
-    public void getListResourceTests(){
-        getListResourceResponse().
+    public void registerUnSuccessfullyTests() {
+        registerUnSuccessfullyResponse().
                 then().
                 assertThat().
-                statusCode(Success_Status_Code).
-                body("page",is(1)).
-                body("per_page",is(6)).
-                body("total", is(12)).
-                body("total_pages", is(2)).
-                body("data", hasSize(6)).
-                body("support", notNullValue());
+                statusCode(Bad_Request_Status_Code).
+                body("error", containsStringIgnoringCase ("Missing password"));
     }
 
-    @Description("This is to log in successfully")
-    @Severity(SeverityLevel.CRITICAL)
     public void loginSuccessfullyTests() {
         loginSuccessfullyResponse().
                 then().
@@ -96,8 +146,7 @@ public class ReqResTests {
                 statusCode(Success_Status_Code).
                 body("token", containsStringIgnoringCase("QpwL5tke4Pnpja7X4"));
     }
-    @Description("This is to log in unsuccessfully")
-    @Severity(SeverityLevel.CRITICAL)
+
     public void loginUnSuccessfullyTests() {
         loginUnSuccessfullyResponse().
                 then().
@@ -106,32 +155,13 @@ public class ReqResTests {
                 body("error", containsStringIgnoringCase ("Missing password"));
     }
 
-    @Description("As an api user i want to get 'Not Found' error for single user ")
+    @Description("As an API user I want to delay the response by 3 seconds")
     @Severity(SeverityLevel.CRITICAL)
-    public void getSingleUserNotFoundTest(){
-        getSingleUserNotFoundResponse().
+    public void getDelayedResponseTests(){
+        getDelayedResponse ().
                 then().
                 assertThat().
-                statusCode(Not_Found_Status_Code);
-    }
-    @Description("As an api user i want to get 'Resource Not Found' error ")
-    @Severity(SeverityLevel.CRITICAL)
-    public void getSingleResourceNotFoundTest(){
-        getSingleResourceNotFoundResponse().
-                then().
-                assertThat().
-                statusCode(HttpStatus.SC_NOT_FOUND);
-    }
-
-    @Description("This is to display a single resource")
-    @Severity(SeverityLevel.CRITICAL)
-    public void getSingleResource() {
-        getSingleResourceResponse().
-                then().
-                assertThat().
-
-                statusCode(Success_Status_Code).
-                body("data", notNullValue()).
-                body("support", notNullValue());
+                statusCode(Success_Status_Code);
+        //body(containsString("George"));
     }
 }

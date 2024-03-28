@@ -35,10 +35,10 @@ public class DogsAPiTests {
                 body("status",containsStringIgnoringCase("success"));
     }
 
-    @Description("As an api user i want to get a dog by breed")
+    @Description("As an api user I want to get a dog by breed")
     @Severity(SeverityLevel.CRITICAL)
     public void getByBreed(){
-        getDogsByBreedResponse().
+        getByBreedResponse ().
                 then().
                 assertThat().
                 statusCode(Success_Status_Code).
@@ -46,7 +46,19 @@ public class DogsAPiTests {
                 body("status",containsStringIgnoringCase("success"));
     }
 
-    @Description("As an api user i want to get Breeds List")
+    @Description("As an api user I want to get list of all sub breeds")
+    @Severity(SeverityLevel.CRITICAL)
+    public void getListofAllSubBreedTest(){
+        getListofAllSubBreedResponse().
+                then().
+                assertThat().
+                statusCode(Success_Status_Code).
+                body(containsStringIgnoringCase("blood")).
+                body(containsStringIgnoringCase("ibizan")).
+                body("status",containsStringIgnoringCase("success"));
+    }
+
+    @Description("As an api user I want to get Breeds List")
     @Severity(SeverityLevel.CRITICAL)
     public void getByBreedsListTest(){
         getBreedsListResponse().

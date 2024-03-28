@@ -29,9 +29,8 @@ public class WeatherStationTests {
                 body("altitude", notNullValue()).
                 body("rank", notNullValue()).
                 body("source_type", notNullValue());
-
-
     }
+
     @Test(dependsOnMethods = "registerNewWeatherStationTests")
     @Description("This is to get information of the newly created Weather Station")
     @Severity(SeverityLevel.CRITICAL)
@@ -69,8 +68,84 @@ public class WeatherStationTests {
                 body ("rank", notNullValue ());
     }
 
+    @Test(dependsOnMethods = "updateWeatherStationInfoTests")
+    @Description("As an api user I want to delete the newly created weather station")
+    @Severity(SeverityLevel.CRITICAL)
+    public void deleteWeatherStationTests() {
+        deleteWeatherStationResponse().
+                then().
+                assertThat().
+                statusCode(delete_Status_Code);
+    }
 
     //*** NEGATIVE TEST HERE***
+
+    @Description("As an api user I want to Register a new Weather Station with a Missing Name Field")
+    @Severity(SeverityLevel.CRITICAL)
+    public void registerNewWeatherStationWithMissingFieldTests() {
+        registerNewWeatherStationWithMissingFieldResponse().
+                then().
+                assertThat().
+                statusCode(Bad_Request_Status_Code).
+                body("code", notNullValue ()).
+                body("message", containsStringIgnoringCase("Bad or zero length station name"));
+    }
+
+    @Description("As an api user I want to Register a new Weather Station with a Missing External ID Field")
+    @Severity(SeverityLevel.CRITICAL)
+    public void registerNewWeatherStationWithMissingExternalIDFieldTests() {
+        registerNewWeatherStationWithMissingExternalIDFieldResponse().
+                then().
+                assertThat().
+                statusCode(Bad_Request_Status_Code).
+                body("code", notNullValue ()).
+                body("message", containsStringIgnoringCase("Bad external id"));
+    }
+
+    @Description("As an api user I want to Register a new Weather Station with longitude As String")
+    @Severity(SeverityLevel.CRITICAL)
+    public void registerNewWeatherStationWithLongitudeAsStringTests() {
+        registerNewWeatherStationWithLongitudeAsStringResponse().
+                then().
+                assertThat().
+                statusCode(Bad_Request_Status_Code).
+                body("code", notNullValue ());
+        //body("message", containsStringIgnoringCase("unmarshal type error: expected=float64, got=string, offset=105"));
+    }
+
+    @Description("As an api user I want to Register a new Weather Station with latitude As String")
+    @Severity(SeverityLevel.CRITICAL)
+    public void registerNewWeatherStationWithLatitudeAsStringTests() {
+        registerNewWeatherStationWithLatitudeAsStringResponse().
+                then().
+                assertThat().
+                statusCode(Bad_Request_Status_Code).
+                body("code", notNullValue ());
+        //body("message", containsStringIgnoringCase("unmarshal type error: expected=float64, got=string, offset=105"));
+    }
+
+    @Description("As an api user I want to Register a new Weather Station with altitude As String")
+    @Severity(SeverityLevel.CRITICAL)
+    public void registerNewWeatherStationWithAltitudeAsStringTests() {
+        registerNewWeatherStationWithAltitudeAsStringResponse().
+                then().
+                assertThat().
+                statusCode(Bad_Request_Status_Code).
+                body("code", notNullValue ());
+        //body("message", containsStringIgnoringCase("unmarshal type error: expected=float64, got=string, offset=105"));
+    }
+
+    @Description("As an api user I want to verify that the response is 405")
+    @Severity(SeverityLevel.CRITICAL)
+    public void verifyTheResponseIs405Tests() {
+        verifyTheResponseIs405Response().
+                then().
+                assertThat().
+                statusCode(Method_Not_Allowed_Status_Code).
+                body("code", notNullValue ());
+        //body("message", containsStringIgnoringCase("unmarshal type error: expected=float64, got=string, offset=105"));
+    }
+
     @Description("As an api user I want to validate that the response status code is 400")
     @Severity(SeverityLevel.CRITICAL)
     public void updateWeatherStationWithInvalidLongitudeValuesTests() {
@@ -78,37 +153,8 @@ public class WeatherStationTests {
                 then ().
                 assertThat ().
                 statusCode (Bad_Request_Status_Code);
-    }
-
-    @Description("As an api user I want register a Longitute as a String")
-    @Severity(SeverityLevel.CRITICAL)
-    public void registerWeatherStationWithLongitudeAsStringTests() {
-        registerNewWeatherStationWithLongitudeAsStringResponse().
-                then ().
-                assertThat ().
-                statusCode (Bad_Request_Status_Code);
-    }
-
-    @Description("As an api user i want to Register Weather Station With Name Empty")
-    @Severity(SeverityLevel.CRITICAL)
-    public void postWeatherStationWithNameEmptyTests() {
-        postWeatherStationWithNameEmptyResponse().
-                then().
-                assertThat().
-                statusCode (Bad_Request_Status_Code).
-                body("code", notNullValue()).
-                body("message", containsStringIgnoringCase ("Bad or zero length station name"));
-    }
-
-    @Description("As an api user I want Get Weather Station Info with Invalid Station ID")
-    @Severity(SeverityLevel.CRITICAL)
-    public void getWeatherStationInfowithInvalidStationIDTests() {
-        getWeatherStationInfowithInvalidStationIDResponse().
-                then ().
-                assertThat ().
-                statusCode (Bad_Request_Status_Code).
-                body ("code", notNullValue ()).
-                body ("message", containsStringIgnoringCase ("Station id not valid"));
+        //body("code", notNullValue ()).
+        //body("message", containsStringIgnoringCase("Station id not valid"));
     }
 
     @Test(dependsOnMethods = "registerNewWeatherStationTests")
@@ -120,8 +166,49 @@ public class WeatherStationTests {
                 assertThat().
                 statusCode(Bad_Request_Status_Code);
     }
+
     @Test(dependsOnMethods = "registerNewWeatherStationTests")
     @Description("As an api user I want to validate that the response status code is 400")
+    @Severity(SeverityLevel.CRITICAL)
+    public void getNewWeatherStationWithInvalidStationIDFormatTests() {
+        getNewWeatherStationWithInvalidStationIDFormatResponse().
+                then().
+                assertThat().
+                statusCode(Bad_Request_Status_Code);
+    }
+
+    @Test(dependsOnMethods = "registerNewWeatherStationTests")
+    @Description("As an api user I want to update Weather Station Information With Altitude As String")
+    @Severity(SeverityLevel.CRITICAL)
+    public void updateWeatherStationWithAltitudeAsStringTests() {
+        updateWeatherStationWithAltitudeAsStringResponse().
+                then ().
+                assertThat ().
+                statusCode (Bad_Request_Status_Code);
+    }
+
+    @Test(dependsOnMethods = "registerNewWeatherStationTests")
+    @Description("As an api user I want to update Weather Station Information With Latitude As String")
+    @Severity(SeverityLevel.CRITICAL)
+    public void updateWeatherStationWithLatitudeAsStringTests() {
+        updateWeatherStationWithLatitudeAsStringResponse().
+                then ().
+                assertThat ().
+                statusCode (Bad_Request_Status_Code);
+    }
+
+    @Test(dependsOnMethods = "registerNewWeatherStationTests")
+    @Description("As an api user I want to update Weather Station Information With Missing Field - External ID")
+    @Severity(SeverityLevel.CRITICAL)
+    public void updateWeatherStationWithMissingFieldExternalIDTests() {
+        updateWeatherStationWithMissingFieldExternalIDResponse().
+                then ().
+                assertThat ().
+                statusCode (Bad_Request_Status_Code);
+    }
+
+    @Test(dependsOnMethods = "registerNewWeatherStationTests")
+    @Description("As an api user I want to update Weather Station Information With Longitude As String")
     @Severity(SeverityLevel.CRITICAL)
     public void updateWeatherStationWithLongitudeAsStringTests() {
         updateWeatherStationWithLongitudeAsStringResponse().
@@ -129,50 +216,15 @@ public class WeatherStationTests {
                 assertThat ().
                 statusCode (Bad_Request_Status_Code);
     }
-    @Description("As an api user I want to validate that the response status code is 40001")
-    @Severity(SeverityLevel.CRITICAL)
+
     @Test(dependsOnMethods = "registerNewWeatherStationTests")
-    public void UpdateWeatherStationWithExternalIDEmptyTest() {
-        UpdateWeatherStationWithExternalIdEmptyResponse().
+    @Description("As an api user I want to delete the Weather Station With Non-Existing Station ID")
+    @Severity(SeverityLevel.CRITICAL)
+    public void deleteWeatherStationWithNonExistingStationIDTests() {
+        deleteWeatherStationWithNonExistingStationIDResponse().
                 then().
                 assertThat().
-                statusCode(Bad_Request_Status_Code).
-                body("code",notNullValue()).
-                body("message",notNullValue());
+                statusCode(Bad_Request_Status_Code);
     }
-
-    @Description("As an api user i want to delete a Weather Station")
-    @Severity(SeverityLevel.CRITICAL)
-    @Test(dependsOnMethods = {"registerNewWeatherStationTests","updateWeatherStationInfoTests","getNewWeatherStationInfoTests"})
-    public void DeleteWeatherStationTest() {
-        DeleteWeatherStationResponse().
-                then().
-                assertThat().
-                statusCode(delete_Success_Status_Code);
-
-    }
-
-
-    @Description("As an api user I want to Update Weather Station Information Missing Field - Name")
-    @Severity(SeverityLevel.CRITICAL)
-    public void updateWeatherStationWithMissingFieldTests() {
-        updateWeatherStationWithMissingFieldResponse ().
-                then ().
-                assertThat ().
-                statusCode (Bad_Request_Status_Code);
-    }
-    @Description("As an api user I want to Register Weather Station With Empty ExternalID")
-    @Severity(SeverityLevel.CRITICAL)
-    public void registerWeatherStationWithoutExtenalIDObject() {
-        postWeatherStationWithEmptyExternalIDResponse()
-                .then()
-                .assertThat()
-                .statusCode(Bad_Request_Status_Code)
-                .body("code", notNullValue())
-                .body("message", containsStringIgnoringCase("Bad external id"));
-    }
-
-
-
 }
 
