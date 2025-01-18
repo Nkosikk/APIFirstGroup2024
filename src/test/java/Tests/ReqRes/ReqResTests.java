@@ -23,7 +23,7 @@ public class ReqResTests {
                 assertThat().
                 statusCode(Create_Success_Status_Code).
                 body("name",containsStringIgnoringCase(generateTestData.FirstName)).
-                body("job",containsStringIgnoringCase(generateTestData.jobTitle)).
+                body("job",containsStringIgnoringCase(generateTestData.JobTitle)).
                 body("id", notNullValue()).
                 body("createdAt", notNullValue());
     }
@@ -55,9 +55,9 @@ public class ReqResTests {
                 then().
                 assertThat().
                 statusCode(Success_Status_Code).
-                body("name", containsStringIgnoringCase("Letho")).
-                body("surname", containsStringIgnoringCase("Mjoli")).
-                body("job", containsStringIgnoringCase("Tester")).
+                body("name", containsStringIgnoringCase(generateTestData.FirstName)).
+                body("surname", containsStringIgnoringCase(generateTestData.LastName)).
+                body("job", containsStringIgnoringCase(generateTestData.JobTitle)).
                 body("updatedAt", notNullValue());
     }
 
@@ -68,8 +68,8 @@ public class ReqResTests {
                 then().
                 assertThat().
                 statusCode(Success_Status_Code).
-                body("name", containsStringIgnoringCase("Que")).
-                body("job", containsStringIgnoringCase("Tester")).
+                body("name", containsStringIgnoringCase(generateTestData.FirstName)).
+                body("job", containsStringIgnoringCase(generateTestData.JobTitle)).
                 body("updatedAt", notNullValue());
     }
 

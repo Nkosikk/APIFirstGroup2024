@@ -10,24 +10,24 @@ public class PayloadBuilder {
     public static JSONObject createUserObject(){
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("name",generateTestData.FirstName);
-        jsonObject.put("job",generateTestData.jobTitle);
+        jsonObject.put("job",generateTestData.JobTitle);
 
         return jsonObject;
     }
     public static JSONObject updateUserObject(){
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("name","Letho");
-        jsonObject.put("surname","Mjoli");
-        jsonObject.put("job","tester");
-        jsonObject.put("Address","34 Aberdeen road");
+        jsonObject.put("name", generateTestData.FirstName);
+        jsonObject.put("surname", generateTestData.LastName);
+        jsonObject.put("job", generateTestData.JobTitle);
+        jsonObject.put("Address",generateTestData.PostalAddress);
 
         return jsonObject;
 }
 
     public static JSONObject patchUpdateUserObject(){
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("name","Que");
-        jsonObject.put("job","tester");
+        jsonObject.put("name", generateTestData.FirstName);
+        jsonObject.put("job", generateTestData.JobTitle);
 
         return jsonObject;
     }

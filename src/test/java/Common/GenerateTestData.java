@@ -9,12 +9,12 @@ public class GenerateTestData {
 
   public static String FirstName =faker.name().firstName();
   public String LastName =faker.name().lastName();
-  public String PostalAdress =faker.address().zipCode();
-    public static String jobTitle = faker.job().title();
+  public String PostalAddress =faker.address().city();
+  public static String JobTitle = faker.job().title();
 
 
   @Test
   public void test(){
-      System.out.println(jobTitle);
+      System.out.println(JobTitle);
   }
 }
